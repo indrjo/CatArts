@@ -1,0 +1,38 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+
+\documentclass[ structure      = book
+              , pagelayout     = compact
+              , maketitlestyle = standard
+              , partfont       = smallcaps
+              , partstyle      = parright 
+              , chapstyle      = parcenter
+              , secstyle       = center
+              , secfont        = roman
+              , subsecstyle    = center
+              , subsecfont     = roman
+              , liststyle      = aligned
+              , quotesize      = normalsize
+              , headerstyle    = center
+              %, greekfont      = artemisia
+              %, twocolcontents = toc
+              ]{suftesi}
+
+\input{../packages.tex}
+\input{../macros.tex}
+
+\title{Notes on Category Theory}
+\author{Indrjo Dedej}
+\date{Last revision: \today{}.}
+
+\begin{document}
+
+\maketitle
+
+%\newgeometry{ margin=3cm }
+\tableofcontents
+%\restoregeometry
+
+\input{skel.tex}
+
+\end{document}

@@ -1,0 +1,15 @@
+% |TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../functors.tex
+
+\section{Category of categories?}
+
+Functors can be composed, and I think a this point it is not a secret. Take \(\cat C\), \(\cat D\) and \(\cat E\) categories and functors
+\[\cat C \functo F \cat D \functo G \cat E .\]
+The sensible way to define the composite functor \(GF : \cat C \to \cat E\) is mapping the objects \(x\) of \(\cat C\) to the objects \(GF(x)\) of \(\cat E\), and the morphisms \(f : x \to y\) of \(\cat C\) to the morphisms \(GF(f) : GF(x) \to GF(y)\) of \(\cat E\). That being set, the composition is associative and there is an identity functor too.
+
+So what prevents us to consider a category --- we can call \(\bf Cat\) --- that has categories as objects and functors as morphisms? If we work upon NBG, we can think of any proper class as a category,  for this statement have a closer look at Example~\ref{example:CollectionsAreCats}. What happens now is that the class of objects of \(\bf Cat\) has an element that is a proper class, which isn't clearly legal in NBG.
+
+Is a category of {\em locally small} categories and functors problematic? Take \(\cat C\) such that \(\cat C(a, b)\) is a proper class for some \(a\) and \(b\) objects: consider \(\cat C{/}{b}\). In this case \(\obj{\cat C/b}\) is a proper class too.
+
+So, now what? If we stick to NBG, this is a limit we have to take into account. From now on, \(\bf Cat\) is the category of {\em small} categories and functors between small categories.

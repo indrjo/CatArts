@@ -1,0 +1,30 @@
+% |TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../functors.tex
+
+\section{Equivalent categories}
+
+Let us give a definition that will motivate our discourse.
+
+\begin{definition}[Full- and faithfulness]
+A functor \(F : \cat C \to \cat D\) is said {\em full}, respectively {\em faithful}, whenever for every \(a, b \in \obj{\cat C}\) the functions
+\[F : \cat C (a, b) \to \cat D(F(a), F(b))\]
+are surjective, respectively injective; we say that \(F\) is {\em fully faithful} \NotaInterna{how lame, lol\dots{}} whenever it is both full and faithful.
+\end{definition}
+
+What do we want \q{two categories are the same} to mean? \NotaInterna{Craft a nicer exposition\dots{} Let us try with categories being isomorphic first, and then with {\em essentially surjective} functors. Talk about {\em skeletons} of categories, and how can help to say whether two categories are equivalent.}
+
+\begin{example}[A functor \(\Mat_k \to \FDVect_k\)]\label{example:MatrixFunctor}
+For \(k\) field, consider the functor
+\[M : \Mat_k \to \FDVect_k\]
+that maps \(n \in \obj{\Mat_k} = \nats\) to \(M(n) \coloneq k^n\) and \(A \in \Mat_k(r, s)\) to the linear function
+\[\begin{aligned}
+& M_A : k^r \to k^s \\
+& M_A(x) = Ax .
+\end{aligned}\]
+(Here the elements of \(k^n\) are matrices of type \(n \times 1\).) \NotaInterna{\dots{}} % We shall return to such functor soon.
+\end{example}
+
+%\begin{example}[Linear functions can be encoded into matrices]
+%Recall Example~\ref{example:MatrixFunctor}. \NotaInterna{Ok, let us try this and see what is the result\dots{} Anyway, there will be another occasion to deal with equivalences of categories, in another fashion.}
+%\end{example}

@@ -1,0 +1,53 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../cats.tex
+
+\section{Isomorphisms}
+
+\NotaInterna{This section has to be rewritten.}
+
+Let us step back to the origins. The categorial axioms state identities that deals with morphisms, since equality between morphisms is involved. For that reason, we shall regard these axioms as ones about morphisms, since objects barely appear as start/end point of morphisms.
+
+Thus categories have a notion of sameness between morphisms, the equality, but nothing is said about objects. Of course, if a category has also the equality for objects, it is fine, but we can craft a better notion of sameness of objects. Not because equality is bad, but we shall look for something that can be stated solely in categorial terms.
+
+As usual, simple examples help us to isolate this notion.
+
+\begin{example}[Set Theory, equinumerousity]
+Cantor, the father of Set Theory, conducted its enquiry on cardinalities and not on equality of sets. For \(A\) and \(B\) sets, the following statements are equivalent:
+\begin{enumerate}
+\item there exists a bijective function \(A \to B\);
+\item there exist two functions
+\begin{tikzcd}[cramped]
+A \ar["f", r, bend left] & B \ar["g", l, bend left]
+\end{tikzcd}
+such that \(g f = \id_A\) and \(fg = \id_B\).
+\end{enumerate}
+Though they are logically equivalent, they differ in some sense. In Set Theory, the adjective \q{bijective} is defined by referring of the fact that sets are things that have elements:
+\begin{quotation}
+for every \(y \in B\) there is one and only one \(x \in A\) such that \(f(x) = y\).
+\end{quotation}
+In contrast, (2) is a statement written in terms of functions and compositions of functions: so (2) is written in a categorial language.
+\end{example}
+
+\begin{exercise}
+Demonstrate the equivalence above.
+\end{exercise}
+
+This is enough to formulate a definition.
+
+\begin{definition}[Isomorphic objects]
+Let \(\cat C\) be a category and \(a\) and \(b\) two of its objects. A morphism \(f : a \to b\) of \(\cat C\) is an {\em isomorphism} whenever there is in the same category a morphism \(g : b \to a\) such that \(gf = \id_a\) and \(fg = \id_b\).
+In that case, \(a\) is said {\em isomorphic} to \(b\) when there is an isomorphism \(a \to b\) in \(\cat C\).
+\end{definition}
+
+\begin{definition}[Skeletal categories]
+\NotaInterna{\dots{}}
+\end{definition}
+
+\begin{example}[Inverse matrices]
+\NotaInterna{Yet to be \TeX{}-ed\dots{}}
+\end{example}
+
+\begin{definition}[Skeleton]
+\NotaInterna{\dots{}}
+\end{definition}

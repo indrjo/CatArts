@@ -1,0 +1,74 @@
+% |TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../transformations.tex
+
+\section{The Yoneda Lemma}
+
+\NotaInterna{Maybe, I should stick to {\em small} categories\dots{}}
+
+\NotaInterna{Use {\tt cramped} for some {\tt tikzcds}\dots{}}
+
+We have the {\em evaluation functor}
+%\[\begin{aligned}
+%& \ev_{\cat C} : \cat C \times [\cat C, \Set] \to \Set \\
+%& \ev_{\cat C}(x, F) := F(x) \\
+%& \ev\left(\begin{tikzcd}[row sep=small] a \ar["f", d, swap] \\ b \end{tikzcd}, \begin{tikzcd}[row sep=small] F \ar["\eta", d, swap, Rightarrow] \\ G \end{tikzcd}\right) := \eta_b F(f) = G(f) \eta_a . \\
+%\end{aligned}\]
+\[\ev_{\cat C} : \cat C \times [\cat C, \Set] \to \Set\]
+that on objects
+\[\ev_{\cat C}(x, F) := F(x)\]
+and on morphisms
+\[\ev\left(\begin{tikzcd}[row sep=small] a \ar["f", d] \\ b \end{tikzcd}, \begin{tikzcd}[row sep=small] F \ar["\eta", d, swap, Rightarrow] \\ G \end{tikzcd}\right) := \eta_b F(f) = G(f) \eta_a .\]
+
+\begin{lemma}[A lemma for the Yoneda Lemma]\label{lemma:YonedaLemmaLemma}
+Let \(\cat C\) be a locally small category. Then for every \(x \in \obj{\cat C}\) and functor \(F : \cat C \to \Set\),
+\[[\cat C, \Set](\cat C(x, -), F) \cong F(x) .\]
+In particular, the classes \([\cat C, \Set](\cat C(x, -), F)\) are  actual sets.
+\end{lemma}
+
+\begin{proof}
+For \(x\) and \(F\) as in the hypothesis, take functions
+%\begin{gather*}
+\[\lambda_{x, F} : [\cat C, \Set](\cat C(x, -), F) \to F(x)\,,\ \lambda_{x, F}(\alpha) := \alpha_x(\id_x) .\]
+%\end{gather*}
+Now, for every \(a \in F(x)\) we have the transformation \(\mu_{x, F}(a)\) from \(\cat C(x, \bullet)\) to \(F\) which has the components
+\[\cat C (x, c) \to F(c)\,,\ f \to \big(F(f)\big)(a) ;\]
+it is immediate to show that it is natural. Thus we have functions
+\[\mu_{x, F} : F(x) \to [\cat C, \Set](\cat C(x, -), F) .\]
+We prove
+\[\begin{aligned}
+& \lambda_{x, F} \mu_{x, F} = \id_{F(x)} \\
+& \mu_{x, F} \lambda_{x, F} = \id_{[\cat C, \Set](\cat C(x, -), F)}.
+\end{aligned}\]
+In fact, for \(a \in F(x)\) we have \(\lambda_{x, F} \big(\mu_{x, F} (a)\big)\) is the component \(\cat C(x, x) \to F(x)\) of \(\mu_{x, F}(a)\) evaluated at \(\id_x\), viz \(\id_{F(x)}(a) = a\). Besides, for if \(\alpha : \cat C(x, \bullet) \tto F\) natural transformation we have \(\mu_{x, F}\big(\lambda_{x, F} (\alpha)\big) = \mu_{x, F}\big(\alpha_x (\id_x)\big)\) is the natural transformation \(\cat C(x, \bullet) \tto F\) with components
+\[\cat C(x, c) \to F(c)\,,\ f \to \big(F(f)\big)(\alpha_x(\id_x)) = \alpha_c(f)\]
+for \(c \in \obj{\cat C}\); that is \(\mu_{x, F} \lambda_{x, F} (\alpha) = \alpha\). The proof is complete now.
+\end{proof}
+
+Let \(\cat C\) be a locally small category.
+We have the functor
+\[\yo_{\cat C} : \cat C \times [\cat C, \Set] \to \Set\]
+given on objects as follows
+\[\yo_{\cat C}(x, F) := [\cat C, \Set]\big(\cat C(x, -), F\big)\]
+and on morphisms
+\[\left[\yo_{\cat C}\left(\begin{tikzcd}[row sep=small] a \ar["f", d, swap] \\ b \end{tikzcd}, \begin{tikzcd}[row sep=small] F \ar["\eta", d, swap, Rightarrow] \\ G \end{tikzcd}\right)\right]\left(\begin{tikzcd}[cramped, row sep=small] {\cat C(a, -)} \ar["\alpha", d, Rightarrow] \\ F \end{tikzcd}\right) :=
+\set{\left. \cat C(b, c) \functo{\eta_c \alpha_c (\_ f)} G(c) \right\mid c \in \obj{\cat C}}.\]
+Observe that Lemma~\ref{lemma:YonedaLemmaLemma} solves annoying size issues in the definition of \(\yo_{\cat C}\) on objects. While the statement of this lemma is important for technical reasons, its proof guides us to the following completion.
+
+\begin{proposition}[Yoneda Lemma]
+For \(\cat C\) locally small category, \(\yo_{\cat C} \cong \ev_{\cat C}\).
+\end{proposition}
+
+\begin{proof}
+The transformation \(\lambda : \yo_{\cat C} \tto \ev_{\cat C}\) having as components the functions \(\lambda_{x, F}\) of the proof of Lemma~\ref{lemma:YonedaLemmaLemma} is natural, that is
+\[\begin{tikzcd}
+\yo_{\cat C} (a, F) \ar["\lambda_{a, F}", r] \ar["{\yo_{\cat C}(f, \eta)}", d, swap] & \ev_{\cat C} (a, F) \ar["{\ev_{\cat C}(f, \eta)}", d] \\
+\yo_{\cat C} (b, G) \ar["\lambda_{b, G}", r, swap] & \ev_{\cat C}(b, G)
+\end{tikzcd}\]
+commutes for every \(f \in \cat C(a, b)\) and \(\eta \in [\cat C, \Set](F, G)\). In fact, for every natural transformation \(\eta \in \yo_{\cat C}(a, F)\) we have
+\[\ev_{\cat C}(f, \eta) \big(\lambda_{a, F} (\alpha)\big) =  \eta_b\alpha_b \cat C(a, f)(\id_a) = \eta_b \alpha_b f ;\]
+besides,
+\[\lambda_{b, G} \big(\yo_{\cat C}(f, \eta) (\alpha)\big) = \eta_b \alpha_b (\_ f)(1_b) = \eta_b \alpha_b f .\]
+%
+We can conclude \(\lambda\) is an isomorphism, as the proof of Lemma~\ref{lemma:YonedaLemmaLemma} tells us its components are isomorphisms.
+\end{proof}

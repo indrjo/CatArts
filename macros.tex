@@ -1,0 +1,74 @@
+% !TEX program = lualatex
+
+% General notations
+\newcommand\nil\varnothing
+\newcommand\set[1]{\left\{#1\right\}}
+\newcommand\angled[1]{\left\langle#1\right\rangle}
+\renewcommand\bar\overline
+\renewcommand\tilde\widetilde
+\renewcommand\hat\widehat
+\newcommand\tto\Rightarrow
+\newcommand\lrarr\Leftrightarrow
+\newcommand\nats{\mathbb N}
+\newcommand\ints{\mathbb Z}
+\newcommand\reals{\mathbb R}
+\newcommand\inout[1]{\textstyle#1\displaystyle}
+\newcommand\epsln\varepsilon
+
+\newcommand\void{\phantom\square}
+
+% Notations pertaining Category Theory
+\newcommand\cat\mathcal
+\newcommand\obj[1]{\left\lvert#1\right\rvert}
+\newcommand\functo[1]{\xrightarrow{\ #1\ }}
+\newcommand\functto[1]{\xRightarrow{\ #1\ }}
+\newcommand\id{\mathtt 1}
+\newcommand\comp{\operatorname{comp}}
+\newcommand\inv[1]{#1^{-1}}
+\newcommand\op[1]{#1^\text{op}}
+%\newcommand\op[1]{\reflectbox{\(#1\)}}
+\newcommand\opcat[1]{\op{\cat #1}}
+%\newcommand\opcat[1]{\reflectbox{\(\cat #1\)}}
+\newcommand\ev{\operatorname{ev}}
+
+% Some categories
+\newcommand\Rel{\mathbf{Rel}}
+\newcommand\Set{\mathbf{Set}}
+\newcommand\FinSet{\mathbf{FinSet}}
+\newcommand\Eqv{\mathbf{Eqv}}
+\newcommand\Par{\mathbf{Par}}
+\newcommand\Grp{\mathbf{Grp}}
+\newcommand\Top{\mathbf{Top}}
+\newcommand\Mat{\mathbf{Mat}}
+\newcommand\Vect{\mathbf{Vect}}
+\newcommand\FDVect{\mathbf{FDVect}}
+\newcommand\Dyn{\mathbf{Dyn}}
+\newcommand\cn{\mathbf{Cn}}
+\newcommand\cocn{\mathbf{CoCn}}
+
+% Other shortcuts
+\newcommand\naturaltr[5]{
+  \begin{tikzcd}[ampersand replacement=\&]
+    #2
+      \ar["#4"{name=A}, r, bend left=35]
+      \ar["#5"{name=B}, r, bend right=35, swap]
+    \& #3
+    \ar["#1", from=A, to=B, natural] 
+  \end{tikzcd}
+}
+
+\newcommand\adjoint[4]{
+  \begin{tikzcd}[ampersand replacement=\&]
+    #1 \ar["{#2}", r, shift left] \& #3 \ar["{#4}", l, shift left]
+  \end{tikzcd}
+}
+
+% https://tex.stackexchange.com/a/602616
+\DeclareFontFamily{U}{dmjhira}{}
+\DeclareFontShape{U}{dmjhira}{m}{n}{ <-> dmjhira }{}
+\DeclareRobustCommand{\yo}{\text{\usefont{U}{dmjhira}{m}{n}\symbol{'110}}}
+
+% ---
+\newcommand\NotaInterna[1]{{\color{red} [#1]}}
+
+\newcommand\lam{\text{{\tt \textgreek{λ}}}}

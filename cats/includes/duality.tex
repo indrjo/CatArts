@@ -1,0 +1,26 @@
+% |TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../cats.tex
+
+\section{Duality}
+
+For \(\cat C\) a category, its {\em dual} (or {\em opposite}) category is denoted \(\op{\cat C}\) and is described as follows. Here, the objects are the same of \(\cat C\) and \q{being a morphism \(a \to b\)} exactly means \q{being a morphism \(b \to a\) in \(\cat C\)}. In other words, passing from a category to its dual leaves the objects unchanged, whereas the morphisms have their verses reversed. To dispel any ambiguity, by \q{reversing} the morphisms we mean that morphisms \(f : a \to b\) of \(\cat C\) can be found among the morphisms \(b \to a\) of \(\op{\cat C}\) and, vice versa, morphisms \(a \to b\) of \(\op{\cat C}\) among the morphisms \(b \to a\) of \(\cat C\). Nothing is actually constructed out of the blue. Some authors suggest to write \(\op f\) to indicate that one \(f\) once it has domain and codomain interchanged, but we do not do that here, because they really are the same thing but in different places. So, if \(f\) is the name of a morphism of \(\cat C\), the name \(f\) is kept to indicate that morphism as a morphism of \(\op{\cat C}\); obviously, the same convention applies in the opposite direction. It may seem we are going to nowhere, but it makes sense when it comes to define the compositions in \(\op{\cat C}\): for \(f : a \to b\) and \(g : b \to c\) morphsisms of \(\op{\cat C}\) the composite arrow is so defined
+\[gf := fg .\label{defeqn:DualComp}\]
+This is not a commutative property, though. Such definition is to be read as follows. At the left side, \(f\) and \(g\) are to be intended as morphisms of \(\op{\cat C}\) that are to be composed therein. Then the composite \(gf\) is calculated as follows:
+\begin{enumerate}
+\item look at \(f\) and \(g\) as morphisms of \(\cat C\) and compose them as such: so \(f : b \to a\) and \(g : c \to b\) and \(fg : c \to a\) according to \(\cat C\);
+\item now regard \(fg\) as a morphism of \(\op{\cat C}\): this is the value \(gf\) is bound to.
+\end{enumerate}
+Let us see now whether the categorial axioms are respected. For \(x\) object of \(\op {\cat C}\) there is \(\id_x\), which is a morphism \(x \to x\) in either of \(\cat C\) and \(\op{\cat C}\). For every object \(y\) and morphism \(f : y \to x\) of \(\op{\cat C}\) we have
+\[\id_x f = f \id_x = f .\]
+Similarly, we have that
+\[g \id_x  = g\]
+for every object \(z\) and morphism \(g : x \to z\) of \(\op{\cat C}\). Hence, \(\id_x\) is an identity morphism in \(\op{\cat C}\) too. Consider now four objects and morphisms of \(\op{\cat C}\)
+\[a \functo f b \functo g c \functo h d\]
+and let us parse the composition
+\[h(gf) .\]
+In \(h(gf)\) regard both \(h\) and \(gf\) as morphisms of \(\cat C\). In that case, \(h(gf)\) is exactly \((gf)h\), where \(gf\) is \(fg\) once \(f\) and \(g\) are taken as morphisms of \(\cat C\) and composed there. So \(h(gf) = (fg)h\), where at left hand side compositions are performed in \(\cat C\): being the composition is associative, \(h(gf) = (fg)h = f(gh)\). We go back to \(\op{\cat C}\), namely \(f(gh)\) becomes \((gh)f\) and \(gh\) becomes \(hg\), so that we eventually get the associativity
+\[h(gf) = (hg) f .\]
+
+It may seem hard to believe, but duality is one of the biggest conquest of Category Theory. \NotaInterna{\dots{}}
+

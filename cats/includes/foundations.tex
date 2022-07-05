@@ -1,0 +1,58 @@
+% !TEX program = lualatex
+% !TEX root = ../cats.tex
+% !TEX spellcheck = en_GB
+
+\section{Foundations}
+
+Let us return at the beginning, namely the definition of category. Why not formulate it in terms of sets? That is, why don't muster the objects into a set, for any pair of objects, the morphisms into a set and writing compositions as functions?
+
+Let us analyse what happens if we do that. A basic and quite popular fact that fatally crushes our hopes is:
+\begin{quotation}
+there is no set of all sets.\footnote{If we want a set \(X\) to be the set of all sets, then it has all its subsets as elements, which is an absurd. In fact, Cantor's Theorem states that for every set \(X\) there is no surjective function \(f : X \to 2^X\).}
+\end{quotation}
+The first aftermath is that the existence of \(\Set\) would not be legal, because otherwise a set would gather all sets.
+
+Another example comes from both Algebra and Set Theory. In general, it's not a so profound result, but it is interesting for our discourse:
+\begin{quotation}
+every pointed set \((X, 1)\) has an operation that makes it a group.\footnote{Actually, this fact is equivalent to the Axiom of Choice.}
+\end{quotation}
+Viz there exists no set of all groups, and then neither \(\Grp\) would be supported.
+
+As if the previous examples were not enough, Topology provides another irreducible case. Any set has the corresponding powerset, thus any set gives rise to at least one topological space. Our efforts are doomed, again: there is no set of all topological spaces, and so also \(\Top\) would not be allowed!
+
+It seems that using Set Theory requires the sacrifice of nice categories; and we do not want that, of course. From the few examples above one could surmise it is a matter of {\em size}: sets sometimes are not appropriate for collecting all the stuff that makes a category. Luckily, there is not a unique Set Theory and, above all, there is one that could help us.
+
+The {\em von Neumann-Bernays-G\"odel approach}, usually shortened as NBG, was born to solve size problems, and may be a good ground for our purposes. In NBG we have {\em classes}, the most general concept of \q{collection}. But not all classes are at the same level: some, the {\em proper classes}, cannot be element of any class, whilst the others are the {\em sets}. Here is how the definition of category would look like. 
+
+\begin{definition}[Categories]
+A category \(\cat C\) consists of:
+\begin{itemize}
+\item a class of objects, denoted \(\obj{\cat C}\);
+\item for every \(a, b \in \obj{\cat C}\), a class of morphisms from \(a\) to \(b\), written as \(\cat C(a, b)\);
+\item for every \(a, b, c \in \obj{\cat C}\), a composition, viz a function
+\[\cat C(b, c) \times \cat C(a, b) \to \cat C(a, c) \,, \ (g, f) \to gf\]
+\end{itemize}
+with the following axioms:
+\begin{enumerate}
+\item for every \(x \in \obj{\cat C}\) there exists a \(\id_x \in \cat C(x, x)\) such that for every \(y \in \obj{\cat C}\) and \(g \in \cat C(y, x)\) we have
+\[\id_x g = g\]
+and for every \(z \in \obj{\cat C}\) and \(h \in \cat C(x, z)\) we have
+\[h \id_x = h ;\]
+\item for \(a, b, c, d \in \obj{\cat C}\) and \(f \in \cat C(a, b)\), \(g \in \cat C(b, c)\) and \(h \in \cat C(c, d)\) we have the identity
+\[(h g) f = h (g f) .\]
+\end{enumerate}
+\end{definition}
+
+How does this double ontology of NBG actually apply at our discourse? For example, in NBG the class of all sets is a legit object: it is a proper class, because it cannot be an actual set. Thus, \(\Set\) exists on NBG, and so exists \(\Grp\), \(\Top\) and other big categories. Which is nice.
+
+Hence, it is sensible to introduce some terms that distinguish categories by the size of their class of objects. [\dots{}]
+
+
+
+%\begin{definition}[Size of categories]
+%A category \(\cat C\) is said {\em small} if the class \(\obj{\cat C}\) is an actual set, {\em large} otherwise.
+%\end{definition}
+
+%Some may argue that Category Theorists cannot be bothered by size issues. Truth be said, Mathematicians usually do not worry too much about foundations, unless they are forced to.
+
+\NotaInterna{What can go wrong if \(\cat C(a, b)\) are proper classes?}

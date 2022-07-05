@@ -1,0 +1,77 @@
+% |TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../cats.tex
+
+\section{The language of diagrams}
+
+A diagram is a drawing made of \q{nodes}, that is empty slots, and \q{arrows}, that part from some nodes and head to other ones. Here is an example:
+\begin{equation}\begin{tikzcd}[row sep=tiny]
+  & \phantom\square \ar[dr, bend left=10] \\
+\phantom\square \ar[ur, bend left=20] \ar[ur, bend right=20, swap] & & \phantom\square  \\
+  & \phantom\square \ar[uu, bend right=10, swap] 
+\end{tikzcd}\label{diagram:MuteDiag}\end{equation}
+%
+Nodes are the places where to put objects' names and arrows are to be labelled with morphisms' names. The next step is putting labels indeed, something like this:
+\begin{equation}\begin{tikzcd}[row sep=tiny]
+  & b \ar["q", dr, bend left=10] \\
+a \arrow["f", ur, bend left=20] \arrow["g", ur, bend right=20, swap] & & d  \\
+  & c \arrow["h", uu, bend right=10, swap] 
+\end{tikzcd}\label{diagram:LabelDiag}\end{equation}
+%
+The idea we want to capture is: having a scheme of nodes and arrows, as in~\eqref{diagram:MuteDiag}, and then assigning labels, as in~\eqref{diagram:LabelDiag}. Since diagrams serve to graphically show some categorial structure, there should exist the possibility to \q{compose} arrows: two consecutive arrows
+\begin{equation}\begin{tikzcd}
+\phantom\square \ar[r, bend left=20] & \phantom\square \ar[r, swap, bend right=20] & \phantom\square
+\end{tikzcd}\label{diagram:ConseqArrs}\end{equation}
+naturally yields that one that goes from the first node and heads to the last one; if in~\eqref{diagram:ConseqArrs} we label the arrows with \(f\) and \(g\), respectively, then the composite arrow is to be labelled with the composite morphism \(gf\). That operation shall be associative and there should exist identity arrows too, that is arrows that represent and behave exactly as identity morphisms. In other words, our drawings shall care of the categorial structure.
+
+If we want to formalize the idea just outlined, the definition of diagram sounds something like this:
+
+%Yes, there is a formal definition of diagram, but we'd better defer this sophistication a bit later.
+
+\begin{definition}[Diagrams]
+A {\em diagram} in a category \(\cat C\) is having:
+\begin{itemize}
+\item a scheme of nodes and arrows, that is a category \(\cat I\);
+\item labels for nodes, that is for every object \(i\) of  \(\cat I\) one object \(x_i\) of \(\cat C\);
+\item labels for arrows, that is for every pair of objects \(i\) and \(j\) of \(\cat I\) and morphism \(\alpha : i \to j\) of \(\cat I\), one morphism \(f_\alpha : x_i \to x_j\) of \(\cat C\)
+\end{itemize}
+with all this complying the following rules:
+\begin{enumerate}
+\item \(f_{\id_i} = \id_{x_i}\) for every \(i\) object of \(\cat I\);
+\item \(f_\beta f_\alpha = f_{\beta\alpha}\), for \(\alpha\) and \(\beta\) two consecutive morphisms of \(\cat I\).
+\end{enumerate}
+\end{definition}
+
+\NotaInterna{A finer formalisation of commutativity?} Consecutive arrows form a \q{path}; in that case, we refer to the domain of its first arrow as the domain of the path and to the codomain of the last one as the codomain of the path. Two paths are said {\em parallel} when they share both domain and codomain. A diagram is said to be {\em commutative} whenever any pair of parallel paths yields the same composite morphism.
+
+\begin{example}[Identities via commutative diagrams]
+Let \(\cat C\) be a category and \(x\) an object of \(\cat C\). The fact that \(\id_x\) the identity of \(x\) can be translated as follows: the diagrams
+%\begin{equation}\begin{tikzcd}[row sep=small]
+% & x \ar["{\id_x}" description, dd] \ar["g", dr] & \\
+%a \ar["f", ur] \ar["f", dr, swap] & &  b \\
+%  & x \ar["g", ur, swap] &
+%\end{tikzcd}\label{diag:IdPropDiag}\end{equation}
+\begin{equation}\begin{tikzcd}[row sep=small]
+ & x \ar["{\id_x}", dd] \\
+a \ar["f", ur] \ar["f", dr, swap]  \\
+  & x &
+\end{tikzcd} \quad
+\begin{tikzcd}[row sep=small]
+x \ar["{\id_x}", dd, swap] \ar["g", dr] & \\
+&  b \\
+x \ar["g", ur, swap] &
+\end{tikzcd}
+\label{diag:IdPropDiag}\end{equation}
+commute for every \(a\) and \(b\) objects and \(f\) and \(g\) morphisms of \(\cat C\).
+\end{example}
+
+\begin{example}[Associativity via commutative diagrams]
+Associativity can be rephrased by saying:
+\[\begin{tikzcd}
+a \ar["f", r] \ar["{gf}", swap, dr] & b \ar["{hg}", dr] \\
+& c \ar["h", swap, r] & d
+\end{tikzcd}\]
+commutes for every \(a\), \(b\), \(c\) and \(d\) objects and \(f\), \(g\) and \(h\) morphisms in \(\cat C\).
+\end{example}
+
+%Cause diagrams are supposed to be drawn, we shall assume some conventions. The spatial placement of nodes and the shape of arrows is a matter of aesthetics, just pursue clarity. Do not burden your diagrams: though arrows can be composed, we usually do not draw them; similarly, neither identities shall be drawn.

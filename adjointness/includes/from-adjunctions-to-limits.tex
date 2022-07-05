@@ -1,0 +1,89 @@
+% !TEX root = ../adjointness.tex
+% !TEX spellcheck = en_GB
+
+\section{Limits from the view of adjunctions}
+
+Let \(\cat I\) and \(\cat C\) be two categories. For every \(v \in \obj{\cat C}\) we have the {\em constant functor}
+\[k_v : \cat I \to \cat C\]
+where \(k_v(i) := v\) for every \(i \in \obj{\cat I}\) and \(k_v(f) := \id_v\) for every morphism \(f\) of \(\cat I\). Recall that being \(\lambda : k_v \tto F\) a limit of a functor \(F : \cat I \to \cat C\) means:
+\begin{quotation}
+for every \(\mu : k_v \tto F\) there exists one and only one \(f : a \to v\) of \(\cat C\) such that \(\mu_i = \lambda_i f\)
+%\[\begin{tikzcd}[row sep=tiny]
+%a \ar["{\mu_i}", dr] \ar["f", dd, swap] \\
+%& F(i) \\
+%v \ar["{\lambda_i}", ur, swap]
+%\end{tikzcd}\]
+commutes for every object \(i\) of \(\cat I\).
+\end{quotation}
+That is, if you put it in other words, it sounds like:
+\begin{quotation}
+there is a bijection
+\[\cat C(a, v) \to [\cat I, \cat C](k_a, F)\]
+taking \(f : a \to v\) to the natural transformation
+\[\lambda_\bullet f : k_a \tto F\,, \ \lambda_\bullet f (i):= \lambda_i f .\]
+\end{quotation}
+
+There is a smell of adjunction situation here. Let us start with finding an appropriate pair of functors
+\[\begin{tikzcd}[column sep=small] \cat C \ar[r, shift left] & {[\cat I, \cat C]} \ar[l, shift left] \end{tikzcd} .\]
+
+One functor is already suggested:
+\[\Delta : \cat C \to [\cat I, \cat C]\]
+takes \(x \in \obj{\cat C}\) to the functor \(\cat I \to \cat C\) that maps every object to \(x\) and every morphism to \(\id_x\); then for \(i \in \obj{\cat I}\) define
+\[\Delta \left(x \functo f y\right)\]
+to be the natural transformation \(\Delta(x) \tto \Delta(y)\) amounting uniquely of \(f\).
+
+From now on, assume \(\cat I\) is small and every functor \(\cat I \to \cat C\) has a limit. Now, in spite of not being strictly unique \NotaInterna{\q{strictly unique}\dots{} huh?}, all the limits of a given functor are isomorphic, so are the vertices: let us indicate by \(\lim F\) the vertex of any of the limits of \(F\). Now, take a natural transformation
+\[\naturaltr{\xi}{\cat I}{\cat C}{F}{G} ;\]
+%you have one morphism
+%\[\lim F \to \lim G\]
+%of \(\cat C\) induced by \(\eta\).
+\(\lim F\) is the vertex of some limit
+\[\set{\left. \lim F \functo{\lambda_i} F(i) \right\mid i \in \obj{\cat I}}\]
+and \(\lim G\) is the vertex of a certain limit
+\[\set{\left. \lim G \functo{\mu_i} G(i) \right\mid i \in \obj{\cat I}} .\] If we display all the stuff we have gathered so far, we have for \(i \in \obj{\cat I}\)
+%\begin{equation}\begin{tikzcd}
+%\lim F \ar["{\lambda_i}", r] & F(i) \ar["{\xi_i}", d] \\
+%\lim G \ar["{\mu_i}", r, swap] & G(i)
+%\end{tikzcd} \label{diagram:LimitOfNaturalTransf}\end{equation}
+\begin{equation}\begin{tikzcd}
+F(i) \ar["{\xi_i}", r] & G(i) \\
+\lim F \ar["{\lambda_i}", u] & \lim G \ar["{\mu_i}", u, swap]
+\end{tikzcd} \label{diagram:LimitOfNaturalTransf}\end{equation}
+The universal property of limits ensures that there is one and only one morphism \(\lim F \to \lim G\) making the above diagram a commuting square. Let us call this morphism \(\lim \xi\). We have a functor
+\[\lim : [\cat I, \cat C] \to \cat C\]
+indeed. If you take \(F = G\) and \(\eta\) the identity of the functor \(F\) in~\eqref{diagram:LimitOfNaturalTransf}, then
+\[\lim \id_F = \id_{\lim F} ,\]
+obtained by uniquely employing the universal property of limit. Now take three functors \(F, G, H :  \cat I \to \cat C\) and two natural transformations \(F \functto \alpha G \functto \beta H\). To these functors are associated the respective limits
+\[\begin{aligned}
+& \set{\left. \lim F \functo{\lambda_i} F(i) \right\mid i \in \obj{\cat I}} \\
+& \set{\left. \lim G \functo{\mu_i} G(i) \right\mid i \in \obj{\cat I}} \\
+& \set{\left. \lim H \functo{\eta_i} H(i) \right\mid i \in \obj{\cat I}}
+\end{aligned}\]
+so that we have commuting squares glued together:
+%\[\begin{tikzcd}
+%\lim F \ar["{\lambda_i}", r] \ar["{\lim \alpha}", d, swap] & F(i) %\ar["{\alpha_i}", d] \\
+%\lim G \ar["{\mu_i}", r] \ar["{\lim \beta}", d, swap] & G(i) \ar["{\beta_i}", d] \\
+%\lim H \ar["{\eta_i}", r] & H(i)
+%\end{tikzcd}\]
+\[\begin{tikzcd}
+F(i) \ar["{\alpha_i}", r] & G(i) \ar["{\beta_i}", r] & H(i) \\
+\lim F \ar["{\lambda_i}", u] \ar["{\lim \alpha}", r, swap] & \lim G \ar["{\mu_i}", u] \ar["{\lim \beta}", r, swap] & \lim H \ar["{\eta_i}", u, swap]
+\end{tikzcd}\]
+We have for every \(i \in \obj{\cat I}\)
+\[\eta_i \lim \beta \lim \alpha = \beta_i \mu_i \lim \alpha = \beta_i \alpha_i \lambda_i ;\]
+then, by how it is defined the limit of a natural transformation, it must be
+\[\lim(\beta\alpha) = \lim\beta \lim \alpha .\]
+
+The following proposition pushes all this discourse to a conclusion.
+
+\begin{proposition}
+There is an adjunction
+\[\begin{tikzcd}
+\phantom{[\cat I, \cat D]}\lapbox{-6pt}{\(\cat C\)}
+\ar["\Delta"{name=delta}, r, bend left=15pt] & {[\cat I, \cat D]} \ar["\lim"{name=lim}, l, bend left=15pt] \ar["\perp"{description}, phantom, from=delta, to=lim]
+\end{tikzcd}\]
+\end{proposition}
+
+\begin{proof}
+\NotaInterna{Yet to be \TeX{}-ed\dots{}}
+\end{proof}

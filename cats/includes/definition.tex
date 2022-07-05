@@ -1,0 +1,172 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../cats.tex
+
+\section{Definition}
+
+Let us start with some examples you should be familiar with.
+
+\begin{example}[Set Theory]
+Here we have {\em sets} and {\em functions}. Whereas these of set and membership are assumed as primitive, the concept of function has a precise definition:
+\begin{quotation}
+For \(A\) and \(B\) sets, a function from \(A\) to \(B\) is any \(f \subseteq A \times B\) such that for every \(x \in A\) there exists one and only one \(y \in B\) such that \((x, y ) \in f\).
+\end{quotation}
+We write \q{\(f : A \to B\)} to mean \q{\(f\) is a function from \(A\) to \(B\)}; for \(x \in A\), we denote by \(f(x)\) the element of \(B\) bound to \(x\) by \(f\). Observe the following ways to introduce a function are equivalent:
+\begin{itemize}
+\item telling the pairs that make \(f\);
+\item for every \(x \in A\) saying which is the \(y \in B\) such that \((x, y) \in f\); I'm sure you are pretty used to introduce functions by writing something like
+\[f(x) := \text{formula that may contain } x .\]
+\end{itemize}
+That being said, let us deal with the operation of composing consecutive functions: for \(A\), \(B\) and \(C\) sets and functions
+\[A \functo{f} B \functo {g} C ,\]
+the {\em composite} of \(g\) and \(f\) is the function posed in this way:
+\begin{align*}
+g \circ f &: A \to C \\
+g \circ f(x) &:= g\big(f(x)\big) .
+\end{align*}
+Such operation has some remarkable properties.
+\begin{enumerate}
+\item For every set \(A\) the function \(\id_A : A \to A\) defined by \(\id_A(x) = x\) is such that for every set \(B\) and function \(g : B \to A\) we have
+\[\id_A \circ g = g\]
+and for every set \(C\) and function \(h : A \to C\) we have
+\[h \circ \id_A = h .\]
+Here, \(\id_A\) is the {\em identity} for \(A\).
+\item \(\circ\) is associative, that is for \(A\), \(B\), \(C\) and \(D\) sets and
+\[A \functo{f} B \functo{g} C \functo{h} D\]
+functions, we have the identity
+\[(h \circ g) \circ f = h \circ (g \circ f) .\]
+\end{enumerate}
+\end{example}
+
+%Ok, now what? The example was crafted to stress the pattern
+%\begin{quotation}
+%some objects; another things going from object to object; compositions of these things; properties of compositions.   
+%\end{quotation}
+
+\begin{example}[Topology]
+A {\em topological space} is a set where some of its subsets have the status of \q{open sets}; {\em continuous functions} are set functions that care about such label: that is for \(X\) and \(Y\) topological spaces a function \(f : X \to Y\) is said {\em continuous} iff for every open set \(U\) of \(Y\) the set \(\inv f U\) is an open set of \(X\). In general, for \(X\), \(Y\) and \(Z\) sets and \(f : X \to Y\) and \(g : Y \to Z\) functions, we have
+\[\inv{(g \circ f)}U = \inv f \left(\inv g U\right) \text{ for every } U \subseteq Z\]
+%for every \(U \subseteq Z\).
+Now, if \(X\), \(Y\) and \(Z\) are topological spaces and \(f\) and \(g\) continuous, for if \(U\) is open, then so is \(\inv{(g \circ f)}U\): that is \(g \circ f\) is continuous as well. Being continuous functions functions, the associativity comes for free; moreover, the identity functions are continuous. Take the properties listed in the previous example and replace \q{set} with \q{topological space} and \q{function} with \q{continuous function} and notice how things work fine.
+\end{example}
+
+Now it's time to give a definition of what we have been highlighting so far. 
+
+\begin{definition}[Categories]
+A {\em category} amounts at assigning some things called {\em objects} and, for each couple of objects \(a\) and \(b\), of some other things named {\em morphisms} from \(a\) to \(b\). We write \(f : a \to b\) to say that \(f\) is a morphism from \(a\) to \(b\), where \(a\) is the {\em domain} of \(f\) and \(b\) the codomain. Besides, for \(a\), \(b\) and \(c\) objects and \(f : a \to b\) and \(g : b \to c\) morphisms, there is associated the {\em composite morphism}
+\[gf : a \to c .\]
+All those things are regulated by the following axioms:
+\begin{enumerate}
+\item for every object \(x\) there is a morphism, \(\id_x\), from \(x\) to \(x\) such that for every object \(y\) and morphism \(g : y \to x\) we have
+\[\id_x g = g\]
+and for every object \(z\) and morphism \(h : x \to z\) we have
+\[h \id_x = h ;\]
+\item for \(a\), \(b\), \(c\) and \(d\) objects and morphisms
+\[a \functo{f} b \functo{g} c \functo{h} d\]
+we have the identity
+\[(h g) f = h (g f) .\]
+\end{enumerate}
+\end{definition}
+
+Sometimes, instead of \q{morphism} you may find written \q{map} or \q{arrow}. The former is quite used outside Category Theory, whereas the latter refers to the fact that \q{\(\to\)} is employed.
+
+\begin{exercise}[Set Theory, again]
+Take sets and relations. For \(A\) and \(B\) sets, by relation from \(A\) to \(B\) we mean a subset of \(A \times B\). Define the composition of two relations --- the first example may suggest to you the \q{right} way to proceed. Can you stand some properties out akin to the case of sets and functions?
+\end{exercise}
+
+\begin{exercise}[Topology, again]
+This is a little variation of the previous example. Take topological spaces and {\em open functions}: now, can you stand out some pattern, like that of the previous two examples? Here, for \(X\) and \(Y\) topological spaces, a function \(f : X \to Y\) is said open whenever for every open set \(U \subseteq X\) the set \(f U \subseteq Y\) is open too. 
+\end{exercise}
+
+\begin{exercise}
+At this early stage, one can provide a generous amount of examples of contexts presenting that leitmotif when things are built upon Set Theory. After all, groups are sets with some additional ingredients, homomorphisms are functions that cares about the group structure, composing two such functions yields a homomorphism; and composition complies the same laws highlighted in the previous two examples. The same applies to vector spaces, measure spaces, probability spaces, \dots{} Make some examples by yourself.
+\end{exercise}
+
+The above definition has the aim to generalize the \q{objects-morphisms-compositionality} pattern to a broader class of situations.
+
+\begin{example}[Monoids are categories]
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\node [circle] (obj) {\(\bullet\)};
+\foreach \i in {0, ..., 4} {
+	\draw [-{To[length=3.5pt, width=3.5pt]}] (obj)
+		.. controls (5+72*\i-15:1cm)
+			and (5+72*\i+15:1cm) .. (obj);
+	\node [circle, anchor=center] at (5+72*\i:1.05cm) {\(\bar\i\)};
+}
+\end{tikzpicture}
+\caption{The group \(\ints_5\) pictured as a category. Actually, you do not need to represent a monoid in this way; the picture is just to give a visual representation of the shift required by Category Theory}
+%\caption{A monoid pictured as a category}
+%\label{fig:MonsAreCats}
+\end{figure}
+Consider a category \(\cat G\) with a single object, that we indicate with a bare \(\bullet\). All of its morphisms have \(\bullet\) as domain and codomain: this fact implies the composite of two morphisms \(\bullet \to \bullet\) is a morphism \(\bullet \to \bullet\) too. This motivates us to proceed as follows: let \(G\) be the collection of the morphisms of \(\cat G\) and consider the function
+\[G \times G \to G\,,\ (x, y) \to xy ,\]
+that is the operation of composing morphisms. Being \(\cat G\) a category implies this function is associative and \(\cat G\) has the identity of \(\bullet\), that is \(G\) has one element we call \(1\) and such that \(f1 = 1f = f\) for every \(f \in G\). In other words, we are saying \(G\) is a monoid.\newline
+Conversely, take a monoid \(G\) and any thing you want: make such thing acquire the status of object and the elements of \(G\) that of morphisms; in that case, the operation of \(G\) has the right to be called composition because the axioms of monoid say so.\newline
+The conclusion is: a monoid \q{is} a category with a single object. \(\bullet\) is something we cared of only because by definition morphisms need objects and it has no role other than this.
+\end{example}
+
+In Mathematics, a lot of things are monoids, so this is nice.
+
+\begin{example}[Preordered sets are categories]
+A {\em preordered set} (sometimes contracted as {\em proset}) consists of a set \(A\) and a relation \(\le\) on \(A\) such that:
+\begin{enumerate}
+\item \(x \le x\) for every \(x \in A\);
+\item for every \(x, y, z \in A\) we have that if \(x \le y\) and \(y \le z\) then \(x \le z\).
+\end{enumerate}
+Now we do this: for \(x, y \in A\), whenever \(x \le y\) take \((a, b) \in A \times A\). We operate with these couples as follows:
+\begin{equation}
+(y, z) (x, y) := (x, z), \label{eqn:ProsetCirc}
+\end{equation}
+where \(x, y, z \in A\). This definition is perfectly motivated by (2): in fact, if \(x \le y\) and \(y \le z\) then \(x \le z\), and so there is \((x, z)\). By (1), for every \(x \in A\) we have the couple \((x, x)\), which has the following property: for every \(y \in A\)
+\begin{equation}
+\begin{aligned}
+(x, y) (x, x) &= (x, y) & \text{for every } y \in A \\
+(x, x) (z, x) &= (z, x) & \text{for every } z \in A .
+\end{aligned}\label{eqn:ProsetId}
+\end{equation}
+Another remarkable feature is that for every \(x_1, x_2, x_3, x_4 \in A\)
+\begin{equation}
+\big((x_3, x_4)(x_2, x_3)\big)(x_1, x_2) = (x_3, x_4)\big((x_2, x_3)(x_1, x_2)\big)\label{eqn:ProsetAssoc}
+\end{equation}
+We have a category indeed: its objects are the elements of \(A\), the morphisms are the couples \((x, y)\) such that \(x \le y\) and~\eqref{eqn:ProsetCirc} gives the notion of composition; \eqref{eqn:ProsetId} says what are identities while~\eqref{eqn:ProsetAssoc} tells the compositions are associative.
+\end{example}
+
+A lot of things are prosets, so this is nice.
+
+\begin{example}[Matrices]
+We need to clarify some terms and notations before. Fixed some field \(k\), for \(m\) and \(n\) positive integers, a {\em matrix} of type \(m \times n\) is a table of elements of \(k\) arranged in \(m\) rows and \(n\) columns:
+\[\begin{pmatrix}
+x_{1,1} & x_{1,2} & \cdots{} & x_{1,n} \\
+x_{2,1} & x_{2,2} & \cdots{} & x_{2,n} \\
+\vdots  & \vdots  &          & \vdots  \\
+x_{m,1} & x_{m,2} & \cdots{} & x_{m,n}
+\end{pmatrix}\]
+If \(A\) is the name of a matrix, then \(A_{i, j}\) is the element on the intersection of the \(i\)th row and the \(j\)th column. Matrices can be multiplied: if \(A\) and \(B\) are matrices of type \(m \times n\) and \(n \times r\) respectively, then \(AB\) is the matrix of type \(m \times r\) where
+\[(AB)_{i, j} := \sum_{p = 1}^n A_{i, p} B_{p ,j} .\]
+Our experiment is this: consider the positive integers in the role of objects and, for \(m\) and \(n\) integers, the matrices of type \(m \times n\) as morphisms from \(n\) to \(m\); now, take \(AB\) as the composition of \(A\) and \(B\). Let us investigate whether categorial axioms hold.
+\begin{itemize}
+\item For \(n\) positive integer, we have the {\em identity matrix} \(I_n\), the one of type \(n \times n\) defined by
+\[(I_n)_{i, j} = \begin{cases}
+1 & \text{if } i = j \\
+0 & \text{otherwise}
+\end{cases}\]
+One, in fact, can verify that such matrix is an \q{identity} in categorial sense: for every positive integer \(m\), an object, and for every matrix \(A\) of type \(m \times n\), a morphism from \(n\) to \(m\), we have
+\[A I_n = A ,\]
+that is composing \(A\) with \(I_n\) returns \(A\); similarly, for every positive integer \(r\) and for every matrix \(B\) of type \(r \times n\) we have
+\[I_n B = B .\]
+\item For \(A\), \(B\) and \(C\) matrices of type \(m \times n\), \(n \times r\) and \(r \times s\) respectively, we have
+\[(AB)C = A(BC) .\]
+Again, this identity can be regarded under a categorial light.
+\end{itemize}
+The category of matrices on a field \(k\) just depicted is written \(\Mat_k\).
+\end{example}
+
+\begin{remark}
+Though the previous example may seem quite useless, it really does matter. Just wait until we talk about equivalence of categories.  
+\end{remark}
+
+\begin{example}[Chain complexes]
+\NotaInterna{\dots{}}
+\end{example}

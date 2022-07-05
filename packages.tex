@@ -1,0 +1,65 @@
+% !TEX program = lualatex
+
+\captionsetup{ width=.8\textwidth
+             , labelfont=bf
+             }
+
+\usepackage[no-math]{fontspec}
+\setmainfont{Linux Libertine O}
+\setmonofont[Scale=MatchLowercase]{Source Code Pro}
+%\setmonofont{Ubuntu Mono}
+
+\usepackage{polyglossia}
+\setmainlanguage[variant=uk]{english}
+\setotherlanguage{greek}
+
+\usepackage[english=british]{csquotes}
+\newcommand\q\enquote
+
+\usepackage{hyperref}
+\hypersetup{breaklinks,hidelinks}
+
+\usepackage{anyfontsize}
+
+\usepackage{indentfirst}
+
+\usepackage{libertinust1math}
+\usepackage{MnSymbol,mathtools}
+\usepackage[bb=ams]{mathalfa}
+
+\usepackage{amsthm}
+\newcounter{coun}
+\counterwithin{coun}{section}
+\theoremstyle{definition}
+\newtheorem{definition}  [coun]{Definition}
+\newtheorem{construction}[coun]{Construction}
+\newtheorem{lemma}       [coun]{Lemma}
+\newtheorem{proposition} [coun]{Proposition}
+\newtheorem{corollary}   [coun]{Corollary}
+\newtheorem{remark}      [coun]{Remark}
+\newtheorem{sandbox}     [coun]{Sandbox}
+\newtheorem{example}     [coun]{Example}
+\newtheorem{exercise}    [coun]{Exercise}
+
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+\newcommand\inlinethm[1]{\stepcounter{coun}{\bf #1 \thecoun}}
+
+\usepackage{tikz}
+\usetikzlibrary{ calc
+               , babel
+               , cd
+               %, arrows.meta
+               %, positioning
+               }
+\tikzcdset{ row sep/normal=.7cm
+          , column sep/normal=.7cm
+          , arrow style=tikz
+          , diagrams={>={To[length=3.5pt,width=3.5pt]}}
+          , shorten=-2pt
+          , natural/.style={shorten=2pt, Rightarrow}
+          }
+
+\usepackage{adjustbox}
+
+\setcounter{chapter}{-1}

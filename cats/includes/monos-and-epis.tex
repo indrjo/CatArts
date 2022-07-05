@@ -1,0 +1,33 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../cats.tex
+
+\section{Monomorphisms and Epimorphisms}
+
+\NotaInterna{This section has to be rewritten.}
+
+\begin{definition}[Monomorphisms and epimorphisms]
+A morphism \(f : a \to b\) of a category \(\cat C\) is said to be:
+\begin{itemize}
+\item a {\em monomorphism} whenever if
+\[\begin{tikzcd}
+c \ar["{g_1}", r, bend left] \ar["{g_2}", r, bend right, swap] & a \ar["f", r] & b
+\end{tikzcd}\]
+commutes for every object \(c\) and morphisms \(g_1, g_2 : c \to a\) of \(\cat C\), then \(g_1 = g_2\);
+\item an {\em epimorphism} whenever if
+\[\begin{tikzcd}
+a \ar["f", r] & b \ar["{h_1}", r, bend left] \ar["{h_2}", r, bend right, swap] & c
+\end{tikzcd}\]
+commutes for every object \(d\) and morphisms \(h_1, h_2 : c \to a\) of \(\cat C\), then \(h_1 = h_2\);
+%\item an {\em epimorphism} when for every object \(d\) and morphisms \(m, n : b \to d\) of \(\cat C\), if \(mf = nf\) then \(m = n\).
+\end{itemize}
+\end{definition}
+
+\NotaInterna{\dots{}}
+
+Another way to express the things of the previous definition is this:
+\(f : a \to b\) is a monomorphism whenever for every \(c \in \obj{\cat C}\) the function
+\begin{equation}\cat C (c, a) \to \cat C (c, b)\,, \ g \to fg \label{eqn:PreCirc}\end{equation}
+is injective. Similarly, \(f : a \to b\) is an epimorphism when for every \(d \in \obj{\cat C}\) the function
+\begin{equation}\cat C (a, d) \to \cat C (b, d)\,, \ h \to hf \label{eqn:PostCirc}\end{equation}
+is injective. Category theorists call the functions~\eqref{eqn:PreCirc} {\em precompositions} with \(f\) and~\eqref{eqn:PostCirc} {\em postcompositions} with \(f\).

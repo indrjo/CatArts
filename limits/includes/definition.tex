@@ -1,0 +1,93 @@
+% !TEX program = lualatex
+% !TEX root = ../limits.tex
+% !TEX spellcheck = en_GB
+
+\section{Definition}
+
+Albeit this may cause uneasy nights, we present ex abrupto the general notion of (co)limits.
+
+\begin{definition}[Limits \& colimits]
+Let \(\cat I\) and \(\cat C\) be two categories. For every \(v \in \obj{\cat C}\) we have the {\em constant functor}
+\[k_v : \cat I \to \cat C\]
+where \(k_v(i) := v\) for every \(i \in \obj{\cat I}\) and \(k_v(f) := \id_v\) for every morphism \(f\) of \(\cat I\). A {\em limit} of a functor \(F : \cat I \to \cat C\) is some \(v \in \obj{\cat C}\) with a natural transformation \(\lambda : k_v \tto F\)
+such that:
+\begin{quotation}
+for any \(a \in \obj{\cat C}\) and \(\mu : k_v \tto F\)
+there exists one and only one \(f \in \cat C(a, v)\) such that
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["{\mu_i}", dr] \ar["f", dd, swap] \\
+& F(i) \\
+v \ar["{\lambda_i}", ur, swap]
+\end{tikzcd}\]
+commutes for every \(i \in \obj{\cat I}\).
+\end{quotation}
+A {\em colimit}, instead, is an object \(u \in \obj{\cat C}\) together with a natural transformation \(\chi : F \tto k_u\) that has the property:
+\begin{quotation}
+for every \(b \in \obj{\cat C}\) and \(\xi : F \tto k_b\) there exists one and only one \(g \in \cat C(u, b)\) that makes
+\[\begin{tikzcd}[row sep=tiny]
+u  \ar["g", dd, swap] \\
+& F(i) \ar["{\chi_i}", ul, swap] \ar["{\xi_i}", dl]\\
+b
+\end{tikzcd}\]
+commute for every \(i \in \obj{\cat I}\).
+\end{quotation}
+\end{definition}
+
+It may be of aid to expand a little bit some parts of the definition. For example, what is a natural transformation \(\eta : k_v \tto F\)? By definition of natural transformation, it is a collection \(\set{\eta_i : v \to F(i) \mid i \in \obj{\cat I}}\) of morphisms of \(\cat C\) that has the property:
+\[\begin{tikzcd}[row sep=tiny]
+& F(i) \ar["{F(f)}", dd] \\
+v \ar["{\eta_i}", ur] \ar["{\eta_j}", dr, swap] \\
+& F(j)
+\end{tikzcd}\]
+commutes for every \(i, j \in \obj{\cat I}\) and \(f \in \cat I (i, j)\).
+
+%\begin{exercise}
+%And what is a natural transformation \(\theta : F \tto k_u\)?
+%\end{exercise}
+
+Yes, for a functor \(\cat I \to \cat C\), the category \(\cat C\) has its share, but it is \(\cat I\) who has the last say in the research of (co)limits. The role of \(\cat I\) is to give a \q{shape} of the limits we are looking for, indeed.
+
+\begin{example}
+Let \(\cat C\) be a category and \(\mathbf 1\) a category that has one object and one morphism, and take a functor \(f : \mathbf 1 \to \cat C\), some \(v \in \cat C\) and the corresponding constant functor \(k_v : \mathbf 1 \to \cat C\). A natural transformation \(\zeta : k_v \tto f\) amounts of a single morphism \(v \to \tilde f\) of \(\cat C\), where \(\tilde f\) indicates the image of the unique object of \(\mathbf 1\) via \(f\). Thus, a limit of \(f\) is some \(v \in \obj{\cat C}\) and a morphism \(\lambda : v \to \tilde f\) of \(\cat C\) such that: for every object \(u\) and morphism \(\mu : u \to \tilde f\) in \(\cat C\), there is a unique morphism \(u \to v\) of \(\cat C\) that makes
+\[\begin{tikzcd}[row sep=tiny]
+u \ar["\mu", dr] \ar[dd] \\
+& \tilde f \\
+v \ar["\lambda", ur, swap]
+\end{tikzcd}\]
+commute.
+\end{example}
+
+\begin{exercise}
+What are colimts of functors \(\mathbf 1 \to \cat C\)?
+\end{exercise}
+
+\begin{sandbox}
+Consider a monoid (viz a single object category) \(\cat G\): for the scope of this example we write \(G\) for the set of the morphisms of \(\cat G\). Let \(F : \cat G \to \Set\) be a functor, and let \(\hat F\) indicate the \(F\)-image of the unique object of \(\cat G\) whilst, for \(f \in G\), \(\hat f\) the function \(F(f) : \hat F \to \hat F\). Now, being \(k_X : \cat G \to \Set\) the functor constant at \(X\), with \(X\) a set, a natural transformation \(\lambda : F \tto k_X\) is a morphism \(\lambda : \hat F \to X\) such that \(\lambda = \lambda \hat f\) for every \(f \in G\). These two things, the set \(X\) and the function \(\lambda\), together are a colimit of \(F\) whenever
+\begin{quotation}
+for every set \(Y\) and function \(\mu : \hat F \to Y\) such that \(\mu = \mu \hat f\) for every \(f \in G\) there exists one and only one function \(h : X \to Y\) such that \(\mu = h \lambda\).
+\end{quotation}
+\NotaInterna{Is that thing even interesting?} \NotaInterna{Write about functors \(\cat G \to \Set\)\dots{}}
+\end{sandbox}
+
+\begin{proposition}\label{proposition:LimitsAreIsomorphic}
+Let \(\cat C\) be a category and \(F : \cat I \to \cat C\) a functor. If \(\eta : k_a \tto F\) and \(\theta : k_b \tto F\) are limits (or colimits) of \(F\), then \(a\) is isomorphic to \(b\).
+\end{proposition}
+
+\begin{proof}
+We prove only the part regarding limits. Being \(\eta\) and \(\theta\) limits of \(F\), we a have a unique \(f : a \to b\) and a unique \(g : b \to a\) that make the two triangles in
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["{\eta_i}", dr] \ar["f", dd, shift left] \\
+& F(i) \\
+b \ar["{\theta_i}", ur, swap] \ar["g", uu, shift left]
+\end{tikzcd}\] 
+commute for every object \(i\) of \(\cat I\). In this case,
+\[\begin{aligned}
+& \eta_i = \theta_i f = \eta_i (gf) \\
+& \theta_i = \eta_i g = \theta_i (fg)
+\end{aligned}\]
+Invoking again the universal property of limits, \(gf = \id_a\) and \(fg = \id_b\).
+\end{proof}
+
+Fortunately, there are few shapes that are both ubiquitous and simple. This section is dedicated to them, while in the successive one we will prove (Proposition~\ref{proposition:Completeness}) that if some simple functors have limits, then all the functors do have limits.
+
+%In this section we present some simple limits, whose importance can be further appreciated once we meet Completeness Theorem (Proposition~\ref{proposition:Completeness}).

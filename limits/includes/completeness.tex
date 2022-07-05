@@ -1,0 +1,131 @@
+% !TEX program = lualatex
+% !TEX root = ../limits.tex
+% !TEX spellcheck = en_GB
+
+\section{(Co)Completeness}
+
+\NotaInterna{No concerns about the size of \(\cat I\)? Start an enquiry about this soon!}
+
+\begin{definition}
+A category \(\cat C\) is said ({\em co}){\em complete} whenever any functor \(\cat I \to \cat C\) has a (co)limit.
+\end{definition}
+
+\NotaInterna{\(\Set\) is a complete category; so why why not deal with this --- in a fine detailed way --- before and postpone the proof of the Completeness Theorem?}
+
+\begin{proposition}[Completeness Theorem]\label{proposition:Completeness}
+Categories that have products and equalizers are complete. 
+\end{proposition}
+
+\begin{proof}
+Take \(\cat I\) and \(\cat C\) to be two categories, and \(X : \cat I \to \cat C\) any functor; just for convenience, let us write \(I\) for \(\obj{\cat I}\). \(\cat C\) has all products, so let us write
+\[\set{\left. p \functo{\phi_i} X_i \right\mid i \in I}\]
+for one of --- it does not matter which one, right? --- the products of \(\set{X_i \mid i \in I}\). The class
+\[H := \set{j \in I \mid \cat I(i, j) \ne \nil \text{ for some } i \in I}\]
+will be useful for the constructions to come. For \(i \in I\), \(j \in H\) and \(f \in \cat I(i, j)\) we can draw this
+\[\begin{tikzcd}[row sep=tiny]
+& X_i \ar["{X_f}", dr, bend left=15pt] \\
+p \ar["{\phi_i}", ur, bend left=15pt] \ar["{\phi_j}", rr, swap, bend right] & & X_j
+\end{tikzcd}\]
+Again by the fact that \(\cat C\) has products, let us write
+\[\set{\left. q \functo{\xi_j} X_j \right\mid j \in H}\]
+for one of the products of \(\set{X_j \mid j \in H}\). Now, the universal property of products yields two morphisms
+\begin{equation}
+\begin{tikzcd} p \ar["\delta", r, shift left] \ar["\theta", r, shift right, swap] & q \end{tikzcd}
+\label{diagram:TwoProducts}
+\end{equation}
+of \(\cat C\) obtained as follows:
+\begin{enumerate}[label=(\arabic*), ref=\arabic*]
+\item\label{universal:theta} \(\theta\) is the one that factors \(\phi_j\) through \(\xi_j\) for \(j \in H\), viz \(\phi_j = \xi_j \theta\).
+\item\label{universal:delta} \(\delta\) is the unique that factors \(X_f \phi_i\) through \(\xi_j\) for every \(i \in I\), \(j \in H\) and \(f \in \cat I(i, j)\), that is \(X_f \phi_i = \xi_j \delta\)
+\end{enumerate}
+\(\cat C\) has equalizers too, so let \(\epsilon : e \to p\) be one of the equalizers of the parallel morphisms in~\eqref{diagram:TwoProducts}. Now that everything is arranged, the rest of the proof is to prove that
+\[\set{\left. e \functo{\phi_i \epsilon} X_i \right\mid i \in I}\]
+is a limit of \(X\). It is important, however, to check preliminarily that it is a natural transformation. Take
+\[\begin{tikzcd}[row sep=tiny]
+& X_i \ar["{X_f}", dd] \\
+e \ar["{\phi_i\epsilon}", ur] \ar["{\phi_j\epsilon}", dr, swap] \\
+& X_j 
+\end{tikzcd}\]
+with \(i, j \in I\) and \(f \in \cat I(i, j)\). If \(j \notin H\), then the commutativity of the diagram is a vacuous truth; otherwise,
+\[X_i \phi_i \epsilon = \underbrace{\xi_j \delta \epsilon = \xi_j \theta \epsilon}_{\epsilon \text{ is equalizer}} = \phi_j \epsilon .\]
+So, let us conclude the proof: provided a natural transformation
+\[\set{\left. a \functo{\sigma_i} X_i \right\mid i \in I} ,\]
+we show how to construct \(a \to e\) that makes
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["{\sigma_i}", dr] \ar[dd] \\
+& X_i \\
+e \ar["{\phi_i \epsilon}", ur, swap]
+\end{tikzcd}\]
+commute. By universal property of product, there is a unique \(\mu : a \to p\) such that \(\sigma_i = \phi_i \mu = \xi_i \theta \mu\) for every \(i \in I\). In particular, for \(j \in H\), \(i \in I\) and \(f \in \cat I (i, j)\)
+\[\sigma_j = \begin{cases}
+\phi_j \mu = \xi_j \theta \mu & \text{by~\eqref{universal:theta}} \\
+X_f \sigma_i = X_f \phi _i \mu = \xi_j  \delta \mu & \parbox{9.5em}{because \(\sigma\) is a natural transformation and~\eqref{universal:delta}}\end{cases}\]
+As a consequence of the universal property of product of \(\xi\), we must have \(\theta \mu = \delta \mu\). Moreover, being \(\epsilon : e \to p\) an equalizer of~\eqref{diagram:TwoProducts}, then \(\mu = \epsilon \psi\) for exactly one \(\psi : a \to e\) of \(\cat C\). Thus \(\sigma_i = \phi_i \mu = \phi_i \epsilon \psi\), so \(\psi\) is what we are are looking for; at this point you can observe the uniqueness of \(\psi\) as well. That's all.
+\end{proof}
+
+\begin{lemma}
+A category have finite products if and only if it has a terminal object and all binary products.
+\end{lemma}
+
+\begin{proof}
+One implication is trivial. Let \(\cat C\) be a category that has a terminal object, say \(1\), and all binary products \NotaInterna{write what this would mean}. Let \(\set{x_1, \dots{}, x_n} \subseteq \obj{\cat C}\) and construct one product for them. We proceed by induction on \(n\). If \(n=0\), we have a product: the terminal object \(1\). Assume now \(\set{x_1, \dots{}, x_n}\) has a product, say the set of morphisms of \(\cat C\)
+\[\set{\alpha_i : p \to x_i \mid i = 1, \dots{}, n} .\]
+Take one \(x_{n+1} \in \obj{\cat C}\). By assumption, there is a product of \(p\) and \(x_{n+1}\), a pair of morphisms
+\[p \xleftarrow \beta q \xrightarrow \gamma x_{n+1} .\]
+The question is: do the morphisms \(\alpha_i \beta : q \to x_i\), for \(i = 1, \dots{}, n\), and \(\gamma\) form a product of \(\set{x_1, \dots{}, x_n, x_{n+1}}\)? Yes, \inlinethm{exercise} (the drawing below is a hint).
+\[\begin{tikzcd}
+& & r \ar["{f_i}", ddll, swap, bend right] \ar["{f_{n+1}}", ddr, bend left] 
+\ar[ddl, bend right, dashed] \ar[d, dotted] \\
+& & q \ar["\beta", dl] \ar["\gamma", dr, swap] \\
+x_i & p \ar["{\alpha_i}", l] & & x_{n+1} 
+\end{tikzcd}\qedhere\]
+\end{proof}
+
+\begin{proposition}[Finite Completeness Theorem I]
+Categories having terminal objects, binary products and equalizers are finitely complete. \NotaInterna{Write a definition for \q{finitely complete}.}
+\end{proposition}
+
+\begin{proof}
+Use the last Lemma and the argument employed to prove the Completeness Theorem.
+\end{proof}
+
+\begin{lemma}
+If a category has a terminal object and pullbacks \NotaInterna{you haven't written about pullbacks yet}, then it has binary products and equalizers.
+\end{lemma}
+
+\begin{proof}
+Call \(\cat C\) the category of the assumptions and \(1\) one of its terminal objects. It is simple that show that pullbacks of
+\[\begin{tikzcd}[sep=small]
+& a \ar[d] \\
+b \ar[r] & 1
+\end{tikzcd}\]
+are products of \(a\) and \(b\). If it is not trivial, \inlinethm{exercise}. Now we show how to get an equalizer out of a terminal object and an appropriate pullback. Consider two parallel morphisms
+\[\begin{tikzcd}[sep=small]
+a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+\end{tikzcd}\]
+of \(\cat C\). As we have just seen, there exists a product of \(a\) and \(b\):
+\[\begin{tikzcd}[sep=small] a & p \ar["\alpha", l, swap] \ar["\beta", r] & b \end{tikzcd}.\]
+By universal property of product, define \(\bar f : a \to p\) to be the morphisms such that \(\alpha \bar f = \id_a\) and \(f = \beta \bar f\). Similarly, let \(\bar g : a \to p\) be the morphism such that \(\alpha \bar g = \id_a\) and \(g = \beta \bar g\). By assumption, \(\cat C\) ha the pullback square
+\[\begin{tikzcd}
+q \ar["m", r] \ar["n", d, swap] & a \ar["{\bar f}", d] \\
+a \ar["{\bar g}", r, swap] & p
+\end{tikzcd}\]
+Here \(m = \alpha \bar f m = \alpha \bar g n = n\), so we end up having the fork
+\[\begin{tikzcd}[sep=small]
+q \ar["m", r] & a \ar["{\bar f}", r, shift left] \ar["{\bar g}", r, shift right, swap] & p
+\end{tikzcd} .\]
+It should be easy to show that \(m\) is an equalizer: this is \inlinethm{exercise}.
+\end{proof}
+
+\begin{proposition}[Finite Completeness Theorem II]
+Categories that have terminal objects and pullbacks are finitely complete.
+\end{proposition}
+
+\begin{proof}
+Use the previous Lemma and the Finite Completeness Theorem I.
+\end{proof}
+
+\NotaInterna{Ok, now what? Topoi?}
+
+
+

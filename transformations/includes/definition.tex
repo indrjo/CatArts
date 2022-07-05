@@ -1,0 +1,43 @@
+% |TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../transformations.tex
+
+\section{Definition}
+
+For \(\cat C\) and \(\cat D\) categories and \(F, G : \cat C \to \cat D\) functors, a {\em transformation} from \(F\) to \(G\) amounts at having for every \(x \in \obj{\cat C}\) one morphism \(F(x) \to G(x)\) of \(\cat D\). In other words, a transformation is aimed to measure the difference of two parallel functor by the unique means we have, viz morphisms.
+
+In general, we stick to the following convention: if \(\eta\) is the name of a transformation from \(F\) to \(G\), then \(\eta_x\) indicates the component \(F(x) \to G(x)\) of the transformation.
+
+We are not interested in all transformations, of course.
+
+\begin{definition}[Natural transformations]
+A transformation \(\eta\) from a functor \(F : \cat C \to \cat D\) to a functor \(G : \cat C \to \cat D\) is said to be {\em natural} whenever for every \(a, b \in \obj{\cat C}\) and \(f \in \cat C(a, b)\) the square
+\[\begin{tikzcd}
+F(a) \ar["{\eta_a}", r] \ar["{F(f)}", d, swap] & G(a) \ar["{G(f)}", d] \\
+F(b) \ar["{\eta_b}", r, swap]                  & G(b)
+\end{tikzcd}\]
+commutes. This property is the \q{naturality} of \(\eta\).
+\end{definition}
+
+There are some notations for referring to natural transformations: one may write \(\eta : F \tto G\) or even
+\[\naturaltr{\eta}{\cat C}{\cat D}{F}{G}\]
+if they want to explicit also categories.
+
+Natural transformations can be composed: taken two consecutive natural transformations
+\[\begin{tikzcd}
+\cat C \ar["F"{name=F}, rr, bend left=70] \ar["G"{name=G, description}, rr] \ar["H"{name=H}, rr, bend right=70, swap] & & \cat D
+\ar["\eta", natural, from=F, to=G] \ar["\theta", natural, from=G, to=H]
+\end{tikzcd}\]
+the transformation \(\theta \eta\) that have the components \(\theta_x \eta_x : F(x) \to H(x)\), for \(x \in \obj{\cat C}\) of \(\cat D\) is natural. Such composition is associative. Moreover, for every functor \(F: \cat C \to \cat D\) there is the natural transformation \(\id_F : F \tto F\) with components \(\id_{F(x)} : F(x) \to F(x)\), for \(x \in \obj{\cat C}\); they are identities in categorial sense:
+\[\begin{aligned}
+\eta \id_F = \eta & \text{ for every natural transformation } \eta : F \tto G \\ 
+\id_F \mu = \mu & \text{ for every natural transformation } \mu : H \tto F .
+\end{aligned}\]
+
+All this suggests to, given two categories \(\cat C\) and \(\cat D\), form a category with functors \(\cat C \to \cat D\) as objects and natural transformations as morphism, them being composable as explained above. [\dots{}]
+
+\NotaInterna{Consider \url{https://mathoverflow.net/q/39073}\dots{}}
+
+
+
+

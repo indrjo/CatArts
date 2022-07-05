@@ -1,0 +1,194 @@
+% !TEX root = ../adjointness.tex
+% !TEX spellcheck = en_GB
+
+\section{Definition}
+
+\begin{example}[Defining linear functions]
+In Linear Algebra, we have a theorem which states linear functions are determined by the images of the elements of any base of the domain:
+\begin{quotation}
+Let \(V\) and \(W\) two vector spaces on some field \(k\), with the first one having a base \(S\); let us write \(i\) for the inclusion function \(S \hookrightarrow V\). Then for every function \(\phi : S \to W\) there exists one and only one linear function \(f : V \to W\) such that
+\[\begin{tikzcd}
+S \ar["i", r, hook] \ar["\phi", dr, swap] & V \ar["f", d] \\
+& W
+\end{tikzcd}\]
+commutes.
+\end{quotation}
+That is the function
+\begin{equation}\begin{aligned}
+\Vect_k(V, W) &\to \Set(S, W) \\
+f &\to fi
+\end{aligned}\label{function:AdjBijSetVect}\end{equation}
+is a bijection; in other words, this function post-composes linear functions with the inclusion of the base of the domain into the domain itself. Here, we write \(\Vect_k\) and \(\Set\) on purpose, because we want to walk a precise path. We have a function pointing to a vector space \(W\), but set functions do not care about \(W\) being a vector space; instead, linear functions do! In some sense, in this example we see \(W\) \q{downgraded} from the status of vector space to the one of barren set. On the other hand, from a set we construct an actual vector space --- this is what being a base means. That being said, let us rearrange the diagram above:
+\[\begin{tikzcd}[column sep=2cm]
+S \ar["{\text{generating}}", r] \ar["\phi", d, swap] & V \ar["f", d] \\
+W & W \ar["{\text{downgrading}}", l]
+\end{tikzcd}\]
+where the horizontal arrows start from some category and land onto another one. The drawing just made is not meant to be a diagram in a strict sense, but an illustration on what is happening. If you are thinking the horizontal arrows are just a piece of a bigger picture, you are right: behind the scenes, two functors
+\[\begin{tikzcd}
+\Vect_k \ar["F", r, shift left] & \Set \ar["G", l, shift left]
+\end{tikzcd}\]
+are acting, where \(F\) is the functor that forgets and \(G\) the functor that takes sets and crafts a vector space from it and takes functions and gives linear functions. \NotaInterna{Do I need to be more specific here? Perhaps, I may talk about such things elsewhere.} However, functors are a matter of morphisms too, so let us involve them too into this discourse. Let us call \(\xi_{S,W}\) the function~\eqref{function:AdjBijSetVect}, as we will soon need thiss notation.\newline
+Take a function \(\phi : S' \to S\) and a linear function \(f : W \to W'\): in this case we have the function
+\[\begin{aligned}
+\Vect_k(G(S), W) & \to \Vect_k(G(S'), W') \\
+g &\to \left(fgG(\phi) : \begin{tikzcd}[row sep=small, column sep=small, ampersand replacement=\&]
+G(S) \ar["g", r] \& W \ar["f", d] \\
+G(S') \ar["G(\phi)", u] \& W'
+\end{tikzcd}\right)
+\end{aligned}\]
+The point is that we have a functor
+\[\Vect_k(G(\void), \void) : \op\Set \times \Vect_k \to \Set\]
+that maps pairs \((S, V)\) to sets \(\Vect_k(G(S), V)\) and with respect to morphisms acts as just described above. It is not enough, giving the same \(\phi\) and \(f\) the function
+%\[\begin{aligned}
+%\Set(S, F(V)) & \to \Set(S', F(V')) \\
+%h &\to F(f) h \phi 
+%\end{aligned}\]
+\[\begin{aligned}
+\Set(S, F(W)) & \to \Set(S', F(W')) \\
+\delta &\to \left(F(f)\delta\phi : \begin{tikzcd}[row sep=small, column sep=small, ampersand replacement=\&]
+S \ar["\delta", r] \& F(W) \ar["F(f)", d] \\
+S' \ar["\phi", u] \& F(W')
+\end{tikzcd}\right)
+\end{aligned}\]
+and so a functor
+\[\Set(\void, F(\void)) : \op\Set \times \Vect_k \to \Set\]
+mapping pairs \((S, V)\) to sets \(\Set(S, F(V))\) this time. That is we ended up with two functors
+\[\op\Set \times \Vect_k \to \Set .\]
+Let us push our discourse a little further: the functions \(\xi_{S, W}\), for \(S\) varying on sets and \(W\) on vector spaces over \(k\), does form a natural isomorphism
+\[\begin{tikzcd}
+\op\Set \times \Vect_k \ar["{\Vect_k(G(\void), \void)}"{name=U}, rr, bend left] \ar["{\Set(\void, F(\void))}"{name=D}, rr, bend right, swap] & & \Set
+\ar["\xi", from=U, to=D, natural]
+\end{tikzcd}\]
+Observe, that being the \(\xi_{S,W}\)-s all isomorphisms, then we are done if we show that \(\xi\) is a natural transformation, viz
+\[\begin{tikzcd}
+\Vect_k(G(S), W) \ar["{\xi_{S, W}}", r] \ar["{\lambda h. fhG(\phi)}", d, swap] & \Set(S, F(W)) \ar["{\lambda h. F(f)h\phi}", d] \\
+\Vect_k(G(S'), W') \ar["{\xi_{S', W'}}", r, swap] & \Set(S', F(W'))
+\end{tikzcd}\]
+commutes for every set \(S\) and \(S'\), vector space \(W\) and \(W'\), function \(\phi : S' \to S\) and linear function \(f : W \to W'\). To prove this, consider the inclusions \(i : S \hookrightarrow G(S)\) and \(i' : S' \hookrightarrow G(S')\). Thus
+\[\left.\begin{gathered}(F(f) (hi) \phi)(v) \\ (f h G(\phi) i') (v) \end{gathered}\right\} = (f (h (\phi(v)))) \text{ for every } v \in S'\]
+and we have concluded.
+\end{example}
+
+I'd love you to experiment by yourself a bit more before reading the definition of adjunction. The following exercise is already started, so you are \q{just} required to finish it. Do not worry if you do not know how to go, read the definition and examine the other examples and return to this exercise. Any choice you do, it is worth to give it it a try now.
+
+\begin{exercise}[Inspired by Haskell\footnote{A programming language. It is not bad you know something about it.}]
+\NotaInterna{Borrow some Haskell notation?} We define the category of partial functions, written as \(\Par\). Here objects are sets and morphisms are partial functions. For \(A\) and \(B\) sets, a {\em partial function} from \(A\) to \(B\) is relation \(f \subseteq A \times B\) with this property:
+\begin{center}
+for every \(x \in A\) and \(y_1, y_2 \in B\), if \((x, y_1) \in f\) and \((x, y_2) \in f\) then \(y_1 = y_2\).
+\end{center}
+We want to compose partial functions as well: provided \(f \in \Par(A, B)\) and \(g \in \Par(B, C)\),
+\[gf \coloneq \set{(x, y) \in A \times C \mid (x, z) \in f \text{ and } (z, y) \in g \text{ for some } z \in B} .\]
+It is immediate to verify \(\Par\) complies the rules that make it a category.\newline
+The thing important here is this: suppose given a partial function \(f : A \to B\), every \(x \in A\) may have one element of \(B\) bound --- in this case, we write it \(f(x)\) --- or none. The key of the exercise is: what if we considered \q{no value} as an admissible output value? Provided two sets \(A\) and \(B\) and a partial function \(f : A \to B\), we assign an actual function
+\[\bar f : A \to B+1 \,, \ \bar f(x) \coloneq \begin{cases} f(x) & \text{if \(x\) has an element of \(B\) bound} \\ \ast & \text{otherwise} \end{cases}\]
+where \(1 \coloneq \set{\ast}\) with \(\ast\) designating the absence of output. It is quite simple to show that
+\[\Par(A, B) \to \Set(A, B+1)\,,\ f \to \bar f\]
+is a bijection for every couple of sets \(A\) and \(B\). Now it's up to you to categorify this by considering two suitable functors
+\[\begin{tikzcd}
+\Set \ar["I", rr, shift left] & & \Par \ar["{\mathtt{Maybe}}", ll, shift left]
+\end{tikzcd}.\]
+It should be simple to guess how is defined \(I\). As for \(\mathtt{Maybe}\), you do not need to know Haskell: if you do, fine, otherwise you are learning something new.
+\end{exercise}
+
+Now it is time to isolate the concept we have envisaged in the previous examples. Let \(\cat C\) and \(\cat D\) be two locally small \NotaInterna{or something more?} categories and
+\[\begin{tikzcd} \cat C \ar["L", r, bend left] & \cat D \ar["R", l, bend left] \end{tikzcd}\]
+two functors. We have then the functor
+\[\hom_{\cat C}(\void, R(\void)) : \opcat C \times \cat D \to \Set\]
+that maps objects \((x, y)\) to \(\hom_{\cat C}(x, R(y))\) and pairs of morphisms
+\[\left(\begin{tikzcd}[row sep=small](x, y) \ar["{(f, g)}", d, swap] \\ (x', y')\end{tikzcd}\right) = \left(\begin{tikzcd}[row sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\]
+to functions
+\[\begin{aligned}
+\hom_{\cat C}(x, R(y)) &\to \hom_{\cat C}(x', R(y')) \\
+h &\to R(g) h f
+\end{aligned}\]
+We have also the functor
+\[\hom_{\cat D}(L(\void), \void) : \opcat C \times \cat D \to \Set\]
+that maps \((x, y)\) to \(\hom_{\cat C}(L(x), y)\) and pairs of morphisms
+\[\left(\begin{tikzcd}[row sep=small](x, y) \ar["{(f, g)}", d, swap] \\ (x', y')\end{tikzcd}\right) = \left(\begin{tikzcd}[row sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\]
+to functions
+\[\begin{aligned}
+\hom_{\cat D}(L(x), y) &\to \hom_{\cat D}(L(x'), y') \\
+h &\to g h L(f) .
+\end{aligned}\]
+
+\begin{exercise}
+The functors just mentioned can be defined as composition of others, one of which is already known. We recall it here. For if \(\cat C\) is a locally small category, the functor
+\[\hom_{\cat C} : \opcat C \times \cat C \to \Set\]
+described as follows:
+\begin{itemize}
+\item objects \((x, y)\) are mapped into sets \(\hom_{\cat C}(x, y)\);
+\item morphisms \((f, g) : (x, y) \to (x', y')\) of \(\opcat C \times \cat C\), viz pairs
+\[\left(\begin{tikzcd}[row sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\]
+with the first morphism regarded as one of \(\cat C\), into functions
+\[\begin{aligned}
+\hom_{\cat C}(x, y) &\to \hom_{\cat C}(x', y') \\
+h &\to ghf
+\end{aligned}\] 
+\end{itemize}
+Now, suppose given two functors
+\[F_1 : \cat C_1 \to \cat D_1 \text{ and } F_2 : \cat C_2 \to \cat D_2.\]
+We define the {\em product functor}
+\[F_1 \times F_2 : \cat C_1 \times \cat C_2 \to \cat D_1 \times \cat D_2\]
+as follows: it maps objects \((a_1, a_2)\) to \((F_1(a_1), F_2(a_2))\) and morphisms
+%\[\left(x_1 \functo{f_1} y_1, x_2 \functo{f_2} y_2\right)\]
+\[\left(
+\begin{tikzcd}[row sep=small]x_1 \ar["{f_1}", d, swap] \\ y_1\end{tikzcd},
+\begin{tikzcd}[row sep=small]x_2 \ar["{f_2}", d, swap] \\ y_2\end{tikzcd}
+\right)\]
+into
+\[\left(
+\begin{tikzcd}[row sep=small]F_1(x_1) \ar["{F_1(f_1)}", d, swap] \\ F_1(y_1)\end{tikzcd},
+\begin{tikzcd}[row sep=small]F_2(x_2) \ar["{F_2(f_2)}", d, swap] \\ F_2(y_2)\end{tikzcd}
+\right)\]
+%\[\left(F_1(x_1) \functo{F_1(f_1)} F_1(y_1), F_2(x_2) \functo{F_2(f_2)} F_2(y_2)\right).\]
+%Now
+%\[\begin{aligned}
+%& \hom_{\cat C}(-, R(\cdot)) := \hom_{\cat C} \circ (\id_{\cat C} \times R) \\
+%& \hom_{\cat D}(L(-), \cdot) := \hom_{\cat D} \circ (L \times \id_{\cat D})
+%\end{aligned}\]
+%\NotaInterna{Ehm\dots{} this needs some more care. Write a finer explanation.}
+\end{exercise}
+
+\begin{definition}[Adjunctions]
+Consider two locally small categories \(\cat C\) and \(\cat D\) and two functors \(\begin{tikzcd}[column sep=small, cramped] \cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left] \end{tikzcd}\). An {\em adjunction} from \(L\) to \(R\) is a natural isomorphism
+\[\begin{tikzcd}[column sep=large]
+\op{\cat C} \times \cat D
+  \ar["{\hom_{\cat C}(-, R(\cdot))}"{name=A}, r, bend left=35] 
+  \ar["{\hom_{\cat D}(L(-), \cdot)}"{name=B}, r, bend right=35, swap]
+  & \Set
+\ar["\alpha", from=A, to=B, natural]
+\end{tikzcd}.\]
+We write such natural isomorphism as \(\alpha : L \dashv R\), and say \(L\) is the {\em left adjoint}, whereas \(R\) is the {\em right} one.
+\end{definition}
+
+\NotaInterna{This part needs to be fixed.} Keeping the notation of the definition above, for \(a \in \obj{\cat C}\), \(b \in \obj{\cat D}\) and \(f \in \hom_{\cat C} (a, R(b))\) we write \(\alpha(f)\) for that element of \(\hom_{\cat D} (L(a), b)\) which corresponds to \(f\) via the adjunction \(\alpha\). Since \(\alpha\) is an isomorphism, it has the inverse \(\inv \alpha : \hom_{\cat D} (L(a), b) \to \hom_{\cat C} (a, R(b))\): again, here \(\inv \alpha(g)\) for \(g \in \hom_{\cat D} (L(a), b)\) denotes the corresponding morphism via \(\inv\alpha\). Actually, the point is there is no preferred direction between the twos mentioned. In fact, for the most general purposes, more drastic conventions can be taken, that is using the same symbol for both \(\alpha\) and \(\inv\alpha\):
+\[\bar{a \functo{f} R(b)} = \left( L(a) \functo{\bar f} b \right) \, , \quad \bar{L(a) \functo{g} b} = \left( a \functo{\bar g} R(b) \right) .\]
+Just pay attention about where things come from and where they are to go! Albeit this requires some caution, this notation has the great advantage that
+\[\bar{\bar p} = p \text{ for every } p .\]
+Now, we can explicitly express the naturality of the adjunction:
+\begin{equation}\bar{R(g) p f} = g \bar p L(f) \label{eqn:AdjNat1}\end{equation}
+where \(x, x' \in \obj{\cat C}\), \(y, y' \in \obj{\cat D}\), \(f \in \hom_{\cat C}(x', x)\), \(g \in \hom_{\cat D}(y, y')\) and \(p \in \hom_{\cat C}(x, R(y))\); equivalently,
+\begin{equation}\bar{g q L(f)} = R(g) \bar q f \label{eqn:AdjNat2}\end{equation}
+where here \(q \in \hom_{\cat D}(L(x), y)\).
+
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%  [ category/.style=
+%    {rectangle, inner sep=.5cm, fill=gray!10!white
+%      , rounded corners=3pt}
+%  , morphism/.style={-{To[length=3.5pt,width=3.5pt]}}]
+%\coordinate (posn-C);
+%\coordinate (posn-D) at ($ (posn-C) + (3cm, 0) $);
+%\node (C) [category]
+%	at (posn-C) {\begin{tikzcd} a \ar["f", d, swap] \\ G(b) \end{tikzcd}};
+%\node [anchor=east] at (C.west) {\(\cat C\)};
+%\node (D) [category]
+%	at (posn-D) {\begin{tikzcd} F(a) \ar["{\bar f}", d] \\ b \end{tikzcd}};
+%\node [anchor=west] at (D.east) {\(\cat D\)};
+%\draw [morphism, thick] 
+%  ($(C.east)+(2mm,2mm)$) to node [auto] {\(F\)} ($(D.west)+ (-2mm,2mm)$);
+%\draw [morphism, thick]
+%  ($(D.west)+(-2mm,-2mm)$) to node [auto] {\(G\)} ($(C.east)+(2mm,-2mm)$);
+%\end{tikzpicture}
+%\end{figure}

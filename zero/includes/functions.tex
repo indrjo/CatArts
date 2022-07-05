@@ -1,0 +1,33 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../zero.tex
+
+\section{Functions}
+
+If \(f\) is a name of a function, we write \(f(x)\) the image of \(x\). However, we may find ourselves writing \(fx\) or \(f_x\) to avoid an excessive usage of brackets.
+
+A literary device --- to be used sparingly, though --- we often use is about functions \(f : A \times B \to C\): for \(x \in A\), we introduce the function
+\[\begin{aligned}
+& f(x, \phantom\square) : B \to C \\
+& f(x, \phantom\square) (y) := f(x, y).
+\end{aligned}\]
+The idea is to \q{hold} the first variable to some value and let the second one vary: this is done by leaving a blank space to be filled with values from \(B\). Obviously, for \(y \in B\), we introduce the function
+\[\begin{aligned}
+& f(\phantom\square, y) : A \to C \\
+& f(\phantom\square, y) (x) := f(x, y).
+\end{aligned}\]
+If it does not create problems, symbols like \(\bullet\), \(\cdot\) and \(-\) could be employed instead of leaving an empty space. You may find written \(f(x, \bullet)\), \(f(x, \cdot)\) or \(f(x, -)\) for example.
+
+Consider for instance the function from \(\reals\) to \(\reals\) that takes real numbers to their square may be denoted by \((\phantom\square)^2\). Similarly, the function that takes \(x \in \reals\) to \(e^x \in \reals\) my be written as \(e^\bullet\).
+
+Another way to introduce functions is via {\em lambdas}: if you have a (well formed) formula \(\Phi\) which may contain a variable \(x\), you can provide the thing
+\[\lam x . \Phi\]
+called {\em lambda abstraction}. You can \q{pass values} to such things: denote by \((\lam x . \Phi) (v)\) is the formula \(\Phi\) with all the occurrences of \(x\) replaced by \(v\). The notation \(\lam x . \Phi\) is exactly like the more familiar
+\[\exists x : \Phi\,, \quad \lim_{x \to 0} f(x) \ \text{or} \ \int_a^b f(x) \mathrm{d}x .\]
+It is not important the choice of the letter \(x\): you can replace \(x\) by another symbol, but remember to substitute the \(x\)-s occurring in \(\Phi\). However, this is not devoid of troubles: do not use a symbol that is already {\em free} in \(\Phi\), viz is not between the \(\lam\) and the symbol of dot. Take \(x+y\) which gives the abstraction \(\lam x . x+y\): we are sure you agree with us that \(\lam y . y+y\) is not the same thing.
+
+So, what is the benefit for us? For example, \(n+1\) gives arise to the function
+\[\begin{aligned}
+& (\lam n . n+1) : \nats \to \nats \\
+& (\lam n . n+1) (k) := k+1 .
+\end{aligned}\]

@@ -1,0 +1,24 @@
+% !TEX program = lualatex
+% !TEX root = ../adjointness.tex
+% !TEX spellcheck = en_GB
+
+\section{Examples}
+
+\begin{example}
+For the sake of this example, let us define the category of {\em partial functions}, written as \(\Par\). Here objects are those of \(\Set\) and morphisms are the {\em partial function}. For \(A\) and \(B\) sets, a partial function from \(A\) to \(B\) is relation \(f \subseteq A \times B\) with this property: for every \(x \in A\) and \(y_1, y_2 \in B\), if \((x, y_1) \in f\) and \((x, y_2) \in f\) then \(y_1 = y_2\).
+In other words, a partial function is --- as the name says --- something that behaves like a function for a part the domain. The composition of partial functions shall be obvious: provided \(f \in \Par(A, B)\) and \(g \in \Par(A, C)\),
+\[gf \coloneq \set{(x, y) \in A \times C \mid (x, z) \in A \times B \text{ and } (z, y) \in B \times C \text{ for some } z \in B} .\]
+Being things set so, it is immediate to verify the categorial axioms.
+
+The thing important here is this: a partial function \(f\) for some input \(x\) may output a unique value, the \(f(x)\), or none. This leads us to a reformulation of the concept of partial function, and the key that unlocks it is: what if we considered \q{no value} as an admissible output value? To illustrate this, take two sets \(A\) and \(B\), \(A' \subseteq A\) and a function of sets \(f : A' \to B\): this actual function is the same a partial function from \(A\) to \(B\) where \(A'\) is the set of the elements of \(A\) mapped to something in \(B\). From \(f\), we can construct the function of sets
+\[\bar f : A \to B+1 \,, \ \bar f(x) \coloneq \begin{cases} f(x) & \text{if } x \in A' \\ \ast & \text{otherwise} \end{cases}\]
+where \(1 \coloneq \set{\ast}\) with \(\ast\) designating the absence of output. It is quite simple to show that
+\[\Par(A, B) \to \Set(A, B+1)\,,\ f \to \bar f\]
+is a bijection for every couple of sets \(A\) and \(B\).
+
+Now, let us categorify this. We have the functors
+\[\begin{tikzcd}
+\Set \ar["I", r, shift left] & \Par \ar["J", l, shift left]
+\end{tikzcd},\]
+where \(I\) is the inclusion of \(\Set\) in \(\Par\), \(J(f)\) for \(x \in A\) returns \(f(x)\) if it exists, otherwise \(\ast\) and \(J(f)(\ast) \coloneq \ast\). [\dots{}]
+\end{example}

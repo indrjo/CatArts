@@ -1,0 +1,66 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+
+\input{../article-class.tex}
+\input{../packages.tex}
+\input{../macros.tex}
+
+\title{TikZ Sandbox}
+\author{Indrjo Dedej}
+\date{Last revision: \today{}.}
+
+\begin{document}
+
+\maketitle
+
+\centering
+
+\begin{tikzpicture}
+  [ dot/.style=
+    {circle, fill, inner sep=0pt, minimum size=3pt}
+  , morph/.style=
+    {-{To[length=3.5pt, width=3.5pt]}, shorten >=2pt, shorten <=2pt}
+  ]
+\node (start) [dot] at (0,0) {};
+\node (end)   [dot] at (2 cm, 0) {};
+\foreach \x in {0, .5, ..., 2} {
+  \pgfmathparse{.5*rnd}
+  \node (up-\i) [dot] at (\x cm, \pgfmathresult cm) {};
+}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+  [ dot/.style=
+    {circle, fill, inner sep=0pt, minimum size=3pt}
+  , morph/.style=
+    {-{To[length=3.5pt, width=3.5pt]}, shorten >=2pt, shorten <=2pt}
+  ]
+\node [dot] (obj) {};
+\foreach \i in {0, ..., 4} {
+  \draw [morph]
+    (obj)
+      to [out=5+72*\i-20, in=5+72*\i+20, looseness=50]
+	  	node [circle, swap, auto] {\(\bar\i\)} (obj);
+}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+  [ category/.style=
+    {rectangle, inner sep=.5cm, fill=gray!10!white
+      , rounded corners=3pt}
+  , morphism/.style={-{To[length=3.5pt,width=3.5pt]}}]
+\coordinate (posn-C);
+\coordinate (posn-D) at ($ (posn-C) + (3cm, 0) $);
+\node (C) [category]
+	at (posn-C) {\begin{tikzcd} a \ar["f", d, swap] \\ G(b) \end{tikzcd}};
+\node [anchor=east] at (C.west) {\(\cat C\)};
+\node (D) [category]
+	at (posn-D) {\begin{tikzcd} F(a) \ar["{\bar f}", d] \\ b \end{tikzcd}};
+\node [anchor=west] at (D.east) {\(\cat D\)};
+\draw [morphism, thick] 
+  ($(C.east)+(2mm,2mm)$) to node [auto] {\(F\)} ($(D.west)+ (-2mm,2mm)$);
+\draw [morphism, thick]
+  ($(D.west)+(-2mm,-2mm)$) to node [auto] {\(G\)} ($(C.east)+(2mm,-2mm)$);
+\end{tikzpicture}
+
+\end{document}

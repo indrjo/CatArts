@@ -1,0 +1,283 @@
+% !TEX program = lualatex
+% !TEX root = ../limits.tex
+% !TEX spellcheck = en_GB
+
+\section{Noteworthy limits and colimits}
+
+\NotaInterna{Make subsections sections?}
+
+\subsection{Terminal and initial objects}
+
+\begin{definition}
+For \(\cat C\) category, the limits of the empty functor \(\nil \to \cat C\) are called {\em terminal objects} of \(\cat C\), whereas the colimits {\em initial objects}.
+\end{definition}
+
+Let us expand the definition above so that we can can look inside things. A cone over the empty functor \(\nil \to \cat C\) with vertex \(a \in \obj{\cat C}\) is a natural transformation
+\[\naturaltr{}{\nil}{\cat C}{k_a}{}.\]
+Here, the empty functor is \(k_a\) because there is at most one functor \(\nil \to \cat C\). Again, because there must be a unique one, our natural transformation is the empty transformation, viz the one devoid of morphisms. A similar reasoning leads us to the following explicit definition of terminal and initial object.
+
+\begin{definition}
+Let \(\cat C\) be a category. Then
+\begin{itemize}
+\item a terminal object of \(\cat C\) is an \(a \in \obj{\cat C}\) such that for every \(x \in \obj{\cat C}\) there exists one and only one \(f \in \cat C(x, a)\);
+\item an initial object of \(\cat C\) is an \(a \in \obj{\cat C}\) such that for every \(x \in \obj{\cat C}\) there exists one and only one \(f \in \cat C(a, x)\).
+\end{itemize}
+\end{definition}
+
+Examples time.
+
+\begin{example}[Empty set and singletons]
+It may sound weird, but for every set \(X\) there does exist a function \(\nil \to X\); moreover, it is the unique one. To get this, think set-theoretically: a function is any subset of \(\nil \times X\) that has the property we know. But \(\nil \times X = \nil\), so its unique subset is \(\nil\). This set is a function from \(\nil\) to \(X\) since the statement
+\begin{quotation}
+for every \(a \in \nil\) there is one and only one \(b \in X\) such that \((a, b) \in \nil\)
+\end{quotation}
+is a \q{vacuous truth}.
+%\footnote{{\em Vacuous truths} are nice logical and mathematical tricks. Suppose \(p\) is a predicate that is never true. Then \q{\(p(x)\) for all \(x\)} is true.}
+So \(\nil\) is an initial object of \(\Set\). This case is quite particular, since the initial objects of \(\Set\) are actually equal to \(\nil\). \newline
+Now let us look for terminal objects in \(\Set\). Take an arbitrary set \(X\): there is exactly one function from \(X\) to any singleton, that is singletons are terminal object of \(\Set\). Conversely, by Proposition~\ref{proposition:LimitsAreIsomorphic}, the terminal objects of \(\Set\) must be singletons.
+\end{example}
+
+\begin{exercise}
+Trivial groups --- there is a unique way a singleton can be a group --- are either terminal and initial objects of \(\Grp\).
+\end{exercise}
+
+We can present a lot of stupid examples, but we can head straight toward more interesting things.
+
+\begin{construction}
+Let us introduce a nice category that allows us to express some nice and simple facts in Mathematics. Let \(\cat C\) and \(\cat J\) two categories, \(a\) one of its objects and take a functor \(F : \cat J \to \cat C\). We have the category \((a \downarrow F)\), this made:
+\begin{itemize}
+\item the objects are the morphisms \(a \to F(x)\) of \(\cat C\), for \(x \in \obj{\cat J}\);
+\item the morphisms from \(f : a \to F(x)\) to \(g : a \to F(y)\) are the morphisms \(h : x \to y\) of \(\cat J\) such that
+\[\begin{tikzcd}[row sep=tiny]
+ & F(x) \ar["{F(h)}", dd] \\
+a \ar["f", ur] \ar["g", dr, swap] \\
+ & F(y)
+\end{tikzcd}\]
+commutes;
+\item the composition is that of \(\cat J\). 
+\end{itemize}
+\end{construction}
+
+\begin{example}
+In Linear Algebra (or when dealing with free modules) we have a nice theorem:
+\begin{quotation}
+Let \(V\) be a vector space over a field \(k\) and \(S \subseteq V\) a base. For every vector space \(W\) over \(k\) and function \(\phi : S \to W\) there exists a unique linear function \(f : V \to W\) such that
+\[\begin{tikzcd}
+S \ar["i", hook, r] \ar["\phi", dr, swap] & V \ar["f", d] \\
+ & W
+\end{tikzcd}\]
+commutes.
+\end{quotation}
+In other words, this statement says that a linear function is completely determined by what it does with the vectors of \(S\). We will consider now two functors
+\[\Set \functo{\angled \cdot} \Vect_k \functo U \Set .\]
+The first one takes a set \(S\) and produces the vector space on \(k\)
+\[\angled S := \set{\left.\sum_{x \in S} \lambda_x x \right\mid \lambda : S \to k,\, \lambda_x \ne 0 \text{ for finitely many times}}\]
+(considered with two obvious operations). Furthermore, a function of sets \(f : S \to T\) induces a linear function \(\angled f : \angled S \to \angled T\) defined by
+\[\angled f \left(\sum_{x \in S} \lambda_x x \right) := \sum_{x \in S} \lambda_x f(x)\]
+where \(\lambda : S \to k\) is almost always null. The functoriality of \(\angled \cdot\) is just a matter of quick controls. {\color{red} [Do we really need all that machinery?]} The functor \(U\) instead takes vector spaces and returns the correspondent set of vectors; we write \(U(V) := V\), but observe that in \(\Set\) we don't care anymore of the vector structure of \(V\). Similarly, it takes linear functions and the return them: but, since \(U\) lands onto \(\Set\), who cares about linearity there? (We may say that \(U\) is the \q{inclusion} of \(\Vect_k\) into \(\Set\).) {\color{red} [Talk about forgetful functors elsewhere\dots{}]}\newline
+All this words allow us restate the aforementioned theorem as:
+\begin{quotation}
+For if \(S\) is a set, the inclusion \(S \hookrightarrow \angled S\) is an initial object of \((S \downarrow U)\).
+%For if \(V\) is a vector space over a field \(k\) and with base \(S\), \(S \hookrightarrow V\) is an initial object of \((S \downarrow U)\).
+\end{quotation}
+\end{example}
+
+\begin{exercise}
+In the previous example some details are omitted: you can be more talkative, though. However, it is really worth to think such examples --- not only because we will meet such pattern later under the vest of adjunctions. You may also look for another examples of similar kind, I'm sure you will find some.
+\end{exercise}
+
+\begin{example}[Isomorphism Theorem for Set Theory]
+We have defined \(\Eqv\) earlier, recall it here. We have the functor
+\[j : \Set \to \Eqv\]
+that maps sets \(X\) to setoids \(X\) together with the equality relation, and functions \(f : X \to Y\) to themselves. To get the mood for this example, sets {\em are} setoids where the equivalence relation is equality and functions {\em are} functoids between such setoids. In this case, the classical theorem
+\begin{quotation}
+Let \(X\) and \(Y\) be two sets and \(\sim\) an equivalence relation on \(X\). For every function \(f : X \to Y\) such that \(f(a) = f(b)\) for every \(a, b \in X\) with \(a \sim b\), there exists one and only one function \(\bar f : X{/}{\sim} \to Y\) such that
+\[\begin{tikzcd}[column sep=tiny]
+X \ar["f", rr] \ar["p", swap, dr] & & Y \\
+& X{/}{\sim} \ar["{\bar f}", swap, ur]
+\end{tikzcd}\]
+commutes, where \(p : X \to X{/}{\sim}\) is the canonical projection.
+\end{quotation}
+can be restated as follows
+\begin{quotation}
+the canonical projection \(p : (X, \sim) \to X{/}{\sim}\) is initial in \((X, \sim) \downarrow j\).
+\end{quotation}
+\end{example}
+
+\begin{example}[Recursion]
+In Set Theory, there is a nice theorem, the {\em Recursion Theorem}:
+\begin{quotation}
+Let \((\nats, 0, s)\) be a Peano Model, where \(0 \in \nats\) and \(s : \nats \to \nats\) is its successor function. For every pointed set \(X\), \(a \in X\) and \(f : X \to X\) there exists one and only one function \(x : \nats \to X\) such that \(x_0 = a\) and \(x_{s(n)} = f(x_n)\) for every \(n \in \nats\).
+\end{quotation}
+Here, by Peano Model we mean a set \(\nats\) that has one element, we write \(0\), stood out and a function \(s : \nats \to \nats\) such that, all this complying some rules:
+\begin{enumerate}
+\item \(s\) is injective;
+\item \(s(x) \ne 0\) for every \(x \in \nats\);
+\item for if \(A \subseteq \nats\) has \(0\) and \(s(n) \in A\) for every \(n \in A\), then \(A = \nats\).
+\end{enumerate}
+We show now how we can involve Category Theory in this case. First of all, we need a category where to work.\newline
+The statement is about things made as follows:
+\begin{quotation}
+a set \(X\), one distinguished \(x \in X\) and one function \(f : X \to X\).
+\end{quotation}
+\NotaInterna{Is there a name for these things?}
+We may refer to such new things by barely a triple \((X, a, f)\), but we prefer something like this:
+\[1 \functo{x} X \functo{f} X ,\]
+where \(1\) is any singleton, as usual. Peano Models are such things, with some additional properties. It is told about the existence and the uniqueness of a certain function. We do not want mere functions, of course: given
+\[1 \functo x X \functo f X \text{ and } 1 \functo y Y \functo g Y ,\]
+we take the functions \(r : X \to Y\) such that
+\[\begin{tikzcd}[row sep=tiny]
+& X \ar["f", r] \ar["r", dd] & X \ar["r", dd] \\
+1 \ar["x", ur] \ar["y", dr, swap] \\
+& Y \ar["g", r, swap] & Y
+\end{tikzcd}\]
+commutes and nothing else. \NotaInterna{Is there a name for such functions?} These ones are the things we want to be morphisms. Suppose given
+\[\begin{tikzcd}
+& X \ar["f", r] \ar["p", d] & X \ar["p", d] \\
+1 \ar["x", ur] \ar["y", r] \ar["z", dr, swap] & Y \ar["g", r] \ar["q", d] & Y \ar["q", d] \\
+& Z \ar["h", r, swap] & Z
+\end{tikzcd}\]
+where all the squares and triangles commute: thus we obtain the commuting
+\[\begin{tikzcd}[row sep=tiny]
+& X \ar["f", r] \ar["qp", dd] & X \ar["qp", dd] \\
+1 \ar["x", ur] \ar["z", dr, swap] \\
+& Z \ar["h", r, swap] & Z
+\end{tikzcd}\] This means that composing two morphisms as functions in \(\Set\) produces a morphism. This is how we want composition to defined in this context. This choice makes the categorial axioms automatically respected. We call this category \(\mathbf{Peano}\). \NotaInterna{Unless there is a better naming, of course.}\newline
+Being the environment set now, the Recursion Theorem becomes more concise:
+\begin{quotation}
+Peano Models are initial objects of \(\mathbf{Peano}\). 
+\end{quotation}
+By Proposition~\ref{proposition:LimitsAreIsomorphic}, any other initial object of \(\mathbf{Peano}\) are isomorphic to some Peano Model: does this mean its initial objects are Peano Models? (Exercise.)
+\end{example}
+
+\begin{exercise}[Induction \(\lrarr\) Recursion]
+In \(\Set\), suppose you have \(1 \functo 0 \nats \functo s \nats\), where \(s\) is injective and \(s(n) \ne 0\) for every \(n \in \nats\). Demonstrate that the following statements are equivalent:
+\begin{enumerate}
+\item for if \(A \subseteq \nats\) has \(0\) and \(s(n) \in A\) for every \(n \in A\), then \(A = \nats\);
+\item \(1 \functo 0 \nats \functo s \nats\) is an initial object of \(\mathbf{Peano}\).
+\end{enumerate} 
+(1) \(\tto\) (2) proves the Recursion Theorem, whereas (2) \(\tto\) (1) requires you to codify a proof by induction into a recursion. Try it, it could be nice. \NotaInterna{Prepare hints\dots{}}
+\end{exercise}
+
+\begin{remark}
+In general, suppose you have a category \(\cat C\) that has a terminal object, that we denote by \(1\). \NotaInterna{Explain why a terminal object is required.} We have then the category \(\mathbf{Peano}_{\cat C}\), that is \(\mathbf{Peano}\) with objects and morphisms picked from \(\cat C\) and compositions performed in \(\cat C\) --- really, there is nothing special in \(\Set\) that hinders us to do so. A {\em natural number object} of \(\cat C\) is any of the initial objects of \(\mathbf{Peano}_{\cat C}\), that is an assignment of one object \(\nats\), a morphism \(0 : 1 \to \nats\) and a morphism \(f : X \to X\) of \(\cat C\) such that they satisfy the {\em recursion property}, the Recursion Theorem but for \(\cat C\). \(\mathbf{Set}\) has natural number objects, as we have seen in the previous example, but another categories may have none. \NotaInterna{For instance?} \NotaInterna{This is quite interesting\dots{} An \q{arithmetic} for categories, perhaps\dots{}}
+\end{remark}
+
+\begin{construction}[Category of cones]
+For \(\cat C\) category, let \(F : \cat I \to \cat C\) be a functor. Then we define the {\em category of cones} over \(F\) as follows.
+\begin{itemize}
+\item The objects are the cones over \(F\).
+\item For \(\alpha := \set{a \functo{\alpha_i} F(i)}_{i \in \obj{\cat I}}\) and \(\beta := \set{b \functo{\beta_i} F(i)}_{i \in \obj{\cat I}}\) two cones, the morphisms from \(\alpha\) to \(\beta\) are the morphisms \(f : a \to b\) of \(\cat C\) such that
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["{\alpha_i}", dr] \ar["f", dd, swap] \\
+& F(i) \\
+b \ar["{\beta_i}", ur, swap]
+\end{tikzcd}\]
+commutes for every \(i \in \obj{\cat I}\).
+\item The composition of morphisms here is the same as that of \(\cat C\).
+\end{itemize}
+We write such category as \(\cn_F\). We define also the {\em category of cocones} over \(F\), written as \(\cocn_F\).
+\begin{itemize}
+\item The objects are the cocones over \(F\).
+\item For \(\alpha := \set{F(i) \functo{\alpha_i} a}_{i \in \obj{\cat I}}\) and \(\beta := \set{F(i) \functo{\beta_i} b}_{i \in \obj{\cat I}}\) cocones, the morphisms from \(\alpha\) to \(\beta\) are the morphisms \(f : a \to b\) of \(\cat C\) such that
+\[\begin{tikzcd}[row sep=tiny]
+& a \ar["{\alpha_i}", dl, swap] \ar["f", dd] \\
+F(i) \\
+& b \ar["{\beta_i}", ul]
+\end{tikzcd}\]
+commutes for every \(i \in \obj{\cat I}\).
+\item The composition of morphisms here is the same as that of \(\cat C\).
+\end{itemize}
+It is quite immediate in either of the cases to show that categorial axioms are verified.
+\end{construction}
+
+\begin{proposition}
+For \(\cat C\)  category and \(F : \cat I \to \cat C\) functor,
+\begin{itemize}
+\item limits of \(F\) are terminal objects of \(\cn_F\) and viceversa.
+\item colimits of \(F\) are initial objects of \(\cocn_F\) and viceversa.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+Simple.
+\end{proof}
+
+\begin{example}[Elements are morphisms from terminal objects]
+A set is an objects made of elements: if \(X\) denotes a set and \(x\) some thing, we can formulate the sentence \(x \in X\). However, we have seen cases --- like \(\Mat_k\) --- where objects are \q{atoms}, that is do not have an internal structure as sets do. In some categories, objects have elements, in others the objects do not.\newline
+Let us take advantage of a basic fact about sets:
+\[X \cong \Set(1, X) \text{ for every set } X .\]
+In general, the isomorphism relation above is not made possible by a unique bijection, but there is one really meaningful for us: the function that takes \(x \in X\) to the function \(\hat x : 1 \to X\) mapping the unique element of \(1\) into \(x\). The great deal here is that functions \(1 \to X\) inspect \(X\) and this isomorphism just outlined identifies every \(x\) to \(\hat x\).\newline
+Let us step back for a moment and turn our attention to the act of defining functions. To define a function \(f : X \to Y\), one write an expression like
+\begin{equation}
+f(x) := \Gamma \label{equation:DefiningAFunction}
+\end{equation}
+with \(\Gamma\) being a formula that may contain the symbol \(x\) or not. By writing something like~\eqref{equation:DefiningAFunction}, you are prescribing the images of each element of the domain. This deeply relies on these two facts:
+\begin{enumerate}
+\item Sets are things you can look inside.
+\item We have a principle that guarantees the function we are defining in such manner is uniquely determined:
+\begin{quotation}
+Given two functions \(f_1, f_2 : X \to Y\), if we have \(f_1(a) = f_2(a)\) for every \(a \in X\), then it must be \(f_1 = f_2\).
+\end{quotation}
+This is crucial, since once you have assigned a function as in~\eqref{equation:DefiningAFunction}, it cannot behave any different from what prescribed.
+\end{enumerate}
+How this can be interesting to us at this point? First of all, \(1\) is a terminal object. We have showed earlier how elements of \(X\) can be thought as functions \(1 \to X\). In this case, the application of \(f\) to \(x\) is the mere composition
+\[f x : 1 \functo x X \functo f Y .\]
+The principle aforementioned can be restated as:
+\begin{quotation}
+If the diagram
+\[\begin{tikzcd}
+1 \ar["x", r] & X \ar["{f_1}", r, shift left] \ar["{f_2}", r, shift right, swap] & Y
+\end{tikzcd}\]
+commutes for every \(x : 1 \to X\), then \(f_1 = f_2\).
+%the functions \(1 \to X\) are epimorphisms. % false!!!
+\end{quotation}
+\NotaInterna{Continue. Do not forget!}
+\end{example}
+
+\subsection{Products and coproducts}
+
+\begin{definition}
+Let \(\cat C\) be a category and \(\cat S\) a discrete category. Then (co)limits of the functors \(X : \cat S \to \cat C\) are called ({\em co}){\em products}.
+\end{definition}
+
+Again, let us put this definition into more explicit terms. First of all, what are cones over \(X : \cat S \to \cat C\)? For \(p \in \obj{\cat C}\) and \(k_p : \cat S \to \cat C\) the functor constant at \(p\), a natural transformation
+\[\naturaltr{\pi}{\cat S}{\cat C}{k_p}{X}\]
+is exactly a collection 
+\[\set{p \functo{\pi_x} X_i}_{i \in \obj{\cat S}} .\]
+In this fortunate case, the naturality condition automatically holds because \(\cat S\) has no morphism other than the identities. Similarly, one can easily deduce what cocones are. Thus the explicit definition is:
+
+\begin{definition}[Explicit]
+\NotaInterna{Introduce some new locutions\dots{}}
+\end{definition}
+
+\begin{example}[Cartesian product]
+Given a family of sets \(\set{X_i \mid i \in I}\), we have the {\em Cartesian product}
+\[\prod_{i \in I} X_i := \set{\left. f : I \to \bigcup_{i \in I} X_i \right\mid f(i) \in X_i \text{ for every } i \in I} .\]
+with the {\em component functions}, one for each \(j \in I\),
+\[p_j : \prod_{i \in I} X_i \to X_j\,,\ p_j(f) := f(j) .\]
+(In other words, \(p_j\) takes an \(f\) and evaluates it at \(j\).) Taken now any set \(A\) and functions \(f_i : A \to X_i\) for \(i \in I\), we have
+\[\prod_{i \in I} f_i : A \to \prod_{i \in I} X_i\]
+with \(\left(\prod_{i \in I} f_i\right) (a)\) mapping \(k \in I\) to \(f_k(a)\). \NotaInterna{Ok, the notation here is becoming cumbersome\dots{} Using \(f_\bullet\) instead of \(\prod_{i \in I} f_i\)? The idea is: \(f_\bullet (a)\) takes \(i\) as input by putting it in place of \(\bullet\).} It is simple to show that
+\[\begin{tikzcd}[row sep=small]
+A \ar["{\prod_{i \in I}} f_i", dd, swap] \ar["{f_\alpha}", dr] \\
+& X_\alpha \\
+\prod_{i \in I} X_i \ar["{p_\alpha}", ur, swap]
+\end{tikzcd}\]
+commutes for every \(\alpha \in I\). Moreover, \(\prod_{i \in I} f_i\) is the only one that does this. Consider any function \(g : A \to \prod_{i \in I} X_i\) with \(f_\alpha = p_\alpha g\) for every \(\alpha \in I\): then for every \(x \in A\) we have
+\[\big(g(x)\big)(\alpha) = p_\alpha \big(g(x)\big) = f_\alpha (x) = p_\alpha\left(\left(\prod_{i \in I} f_i\right)(x)\right) = \left(\left(\prod_{i \in I} f_i\right)(x)\right)(\alpha) .\]
+Hence, we can conclude \(\prod_{i \in I} X_i\) with the collection of functions \(\set{p_i \mid i \in I}\) is a product in \(\Set\). \NotaInterna{Ok, where is all the machinery developed? Be more explicit.}
+\end{example}
+
+\subsection{Equalizers and coequalizers}
+
+\subsection{Pullbacks and pushouts}
+
+\begin{example}[Seifert-van Kampen theorem]
+Suppose given a topological space \(X\), \(A, B \subseteq X\) open sets such that \(A \cup B = X\) and a point \(x_0\) of \(A \cap B\). Let us denote by \(i_A\), \(i_B\), \(j_A\) and \(j_B\) the group morphisms induced by the inclusions \(A \cap B \hookrightarrow A\), \(A \cap B \hookrightarrow B\), \(A \hookrightarrow X\) and \(B \hookrightarrow X\), respectively. If \(A\), \(B\) and \(A \cap B\) are path-connected then,
+\[\begin{tikzcd}
+\pi_1(A \cap B, x_0) \ar["{i_A}", r] \ar["{i_B}", d, swap] & \pi_1(A, x_0) \ar["{j_A}", d] \\
+\pi_1(B, x_0) \ar["{j_B}", r, swap] & \pi_1(X, x_0)
+\end{tikzcd}\]
+is a pushout square of \(\Grp\).
+\end{example}

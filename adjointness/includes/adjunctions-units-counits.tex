@@ -1,0 +1,57 @@
+% !TEX root = ../adjointness.tex
+% !TEX spellcheck = en_GB
+
+\section{Adjunctions, units and co-units}
+
+In the first example of the introduction, we isolated the concept of adjunction from that one of initial objects of certain categories. We now isolate and formalize this process; we will do the converse too. As result, we end up having two equivalent ways to work with adjointness.
+
+\begin{proposition}
+Suppose given two locally small categories \(\cat C\) and \(\cat D\), two functors
+\(\begin{tikzcd}[column sep=small]
+\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+\end{tikzcd}\)
+and a natural transformation \(\eta : \id_{\cat C} \tto RL\) such that \(\eta_x : x \to RL(x)\) is initial in \(x {\downarrow} R\) for every \(x \in \obj{\cat C}\).  Then, for \(x \in \obj{\cat C}\) and \(y \in \obj{\cat D}\), the functions
+\[\cat D(Lx, y) \to \cat C(x, Ry)\,, \ f \to R(f)\eta_x\]
+form a natural transformation \(\cat D(L(\phantom\square), \phantom\square) \tto \cat C(\phantom\square , R(\phantom\square))\).
+\end{proposition}
+
+\begin{proof}
+%For \(x \in \cat C\) and \(y \in \cat D\) we have the functions
+%\[\cat D(Lx, y) \to \cat C(x, Ry)\,, \ f \to R(f)\eta_x .\]
+The fact that \(\eta_x\) is initial object implies that these function are all bijective. Now, we just need to verify the transformation is natural. Take \(x, x' \in \obj{\cat C}\), \(y, y' \in \obj{\cat D}\), \(f \in \cat C(x', x)\) and \(g \in \cat D(y, y')\) and examine the square
+\[\begin{tikzcd}[column sep=large]
+\cat D(L(x), y) \ar["{u \to R(u) \eta_x}", r] \ar["{u \to guL(f)}", d, swap] & \cat C(x, R(y)) \ar["{v \to R(g)v f}", d] \\
+\cat D(L(x'), y') \ar["{v \to R(v) \eta_{x'}}", r, swap] & \cat C(x', R(y'))
+\end{tikzcd}\]
+Taken \(u \in \cat D(L(x), y)\), we perform the following calculations
+\[\begin{aligned}
+& R(g) R(u) \eta_x f = R(gu) \eta_x f \\
+& R(guL(f)) \eta_{x'} = R(gu) RL(f) \eta_{x'}
+\end{aligned}\]
+By naturality \(\eta_x f = RL(f) \eta_{x'}\), so the construction ends here.
+\end{proof}
+
+\begin{proposition}
+Suppose given locally small categories \(\cat C\) and \(\cat D\), two functors
+\(\begin{tikzcd}[column sep=small]
+\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+\end{tikzcd}\)
+and an adjunction \(\alpha : L \dashv R\). Then \(\eta : \id_{\cat C} \tto RL\) is natural and \(\eta_x : x \to RL(x)\) is initial in \(x {\downarrow} R\) for every \(x \in \obj{\cat C}\).
+\end{proposition}
+
+\begin{proposition}
+Suppose now you have locally small categories \(\cat C\) and \(\cat D\), functors
+\(\begin{tikzcd}[column sep=small]
+\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+\end{tikzcd}\) and an adjunction \(\alpha : L \dashv R\).%, that is a natural isomorphism
+%\[\begin{tikzcd}[column sep=large]
+%\opcat C \times \cat D \ar["{\cat D(L(\void), \void)}"{name=A}, r , bend left] \ar["{\cat C(\void, R(\void))}"{name=B}, r, bend right, swap] & \Set \ar["\alpha", natural, from=A, to=B]
+%\end{tikzcd}.\]
+Then the morphisms of \(\cat C\)
+\[\eta_x : x \to RL(x)\,, \ \eta_x := \alpha\left(\id_{L(x)}\right) \quad\text{where } x \in \obj{\cat C}\]
+do form a natural transformation \(\eta : \id_{\cat C} \tto RL\); moreover, \(\eta_x\) is initial in \(x {\downarrow} R\).
+\end{proposition}
+
+\begin{proof}
+Yet to be \TeX{}-ed\dots{}
+\end{proof}
